@@ -92,3 +92,7 @@ Route::get('pengajar/indexpertanyaan/menjawab/{ID}','PertanyaanController@jawabp
 Route::post('/pengajar/indexpertanyaan/simpan','PertanyaanController@simpan');
 Route::get('/pengajar/peserta','DasboardController@lihatpeserta');
 
+
+//DARI SI PETANI
+Route::get('admin/wilayah/show','WilayahController@wilayah_show');
+

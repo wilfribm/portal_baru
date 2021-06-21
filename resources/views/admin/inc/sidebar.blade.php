@@ -33,7 +33,43 @@
               </p>
             </a>
           </li>
+          <!-- <li class="nav-item">
+            <a href="{{url('admin/pertanyaan/')}}" class="nav-link">
+              <i class="nav-icon fas fa-question-circle "></i>
+              <p>
+                Pertanyaan
+                
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
+            <a href="{{url('admin/pengajar/')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Pengajar
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/kategori/')}}" class="nav-link">
+              <i class="nav-icon fas fa-list-ul"></i>
+              <p>
+                Kategori
+                
+              </p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-align-justify"></i>
+              <p>
+                Learning
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
             <a href="{{url('admin/pertanyaan/')}}" class="nav-link">
               <i class="nav-icon fas fa-question-circle "></i>
               <p>
@@ -60,7 +96,111 @@
               </p>
             </a>
           </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-align-justify"></i>
+              <p>
+                Data Petani
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+            <a href="{{url('admin/wilayah/show')}}" class="nav-link">
+              <i class="nav-icon fa fa-map-marker "></i>
+              <p>
+                Pendataan Wilayah
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/pengajar/')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Pendataan Petani
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/kategori/')}}" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Pendataan Kelompok Tani
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/kategori/')}}" class="nav-link">
+              <i class="nav-icon fa fa-sitemap"></i>
+              <p>
+                Struktur Organisasi
+                
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{{url('admin/kategori/')}}" class="nav-link">
+              <i class="nav-icon fa fa-user-circle-o"></i>
+              <p>
+                Keanggotaan Petani
+                
+              </p>
+            </a>
+          </li>
+            </ul>
+          </li>
+
+
+         <!--  <li class="nav-item menu-open">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fa fa-folder-open"></i>
+              <p>
+                Data Petani
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('admin/wilayah/')}}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pendataan Wilayah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pendataan Petani</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pendataan Kelompok Tani</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Struktur Organisasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Keanggotaan Petani</p>
+                </a>
+              </li>
+            </ul>
+          </li> -->
         </ul>
+         
+       
   
 
       </nav>
