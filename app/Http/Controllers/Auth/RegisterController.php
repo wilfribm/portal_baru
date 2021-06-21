@@ -118,6 +118,51 @@ class RegisterController extends Controller
         } 
                  
     }
+
+    public function daftar_baru_admin(Request $request){
+        $ID_User = $request->input('ID_User');
+        $Password = $request->input('password');
+        $PIN = '123456'; 
+        $jawaban = ' asal ';
+        $Tingkat_Priv = '0';
+        $nama = $request->input('nama');
+        $jenis_kelamin = $request->input('jenis_kelamin');
+        $tanggal_lahir = $request->input('tanggal_lahir');
+        $alamat = $request->input('alamat');
+        $provinsi= $request->input('provinsi');
+        $kabupaten = 'asal ';
+        $kecamatan = 'asal ';
+        $kelurahan_desa = 'asal ';  
+        $nomor_telpon = $request->input('nomor_telpon');
+        $Email = $request->input('Email');
+        $foto = 'asal';
+        $ID_Kategori = $request->input('ID_Kategori');
+        //$hashpass=bcrypt($Password);
+        $hashpass=sha1($Password);
+
+     $m_user=array('ID_User'=>$ID_User,'password'=>$hashpass,'jawaban'=>$jawaban,'PIN'=>$PIN,'Tingkat_Priv'=>$Tingkat_Priv);
+
+        $detail=array('ID_User'=>$ID_User, 'nama'=>$nama,'jenis_kelamin'=>$jenis_kelamin,
+                    'tanggal_lahir'=>$tanggal_lahir,'alamat'=>$alamat,'provinsi'=>$provinsi,'nomor_telpon'=>$nomor_telpon,'Email'=>$Email,
+                    'kabupaten'=>$kabupaten,'kecamatan'=>$kecamatan,'kelurahan_desa'=>$kelurahan_desa,'foto'=>$foto);
+                    
+        $kat=array('ID_User'=>$ID_User, 'ID_kategori'=>$ID_Kategori); 
+
+        $count =DB::table('master_user')->where('ID_User', $ID_User)->count();
+        
+        if($count > 0){
+            return redirect('/register')->with('alert','Maaf Username ànda telah digunakan ');
+        }else{
+        
+                  
+                    DB::table('master_user')->insert($m_user);
+                    DB::table('master_detail_user')->insert($detail);
+                    DB::table('master_user_kat')->insert($kat);
+                   
+                    return redirect('admin/daftar/petani')->with('success', 'Tambah Petani Berhasil');         
+        } 
+                 
+    }
     public function showprovinsi(){
         
     }

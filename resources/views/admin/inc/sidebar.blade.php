@@ -108,7 +108,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
             <a href="{{url('admin/wilayah/show')}}" class="nav-link">
               <i class="nav-icon fa fa-map-marker "></i>
               <p>
@@ -116,9 +116,9 @@
                 
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="{{url('admin/pengajar/')}}" class="nav-link">
+            <a href="{{url('admin/daftar/petani/')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pendataan Petani
@@ -126,7 +126,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="{{url('admin/kategori/')}}" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
@@ -134,8 +134,8 @@
                 
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="{{url('admin/kategori/')}}" class="nav-link">
               <i class="nav-icon fa fa-sitemap"></i>
               <p>
@@ -143,8 +143,8 @@
                 
               </p>
             </a>
-          </li>
-           <li class="nav-item">
+          </li> -->
+          <!--  <li class="nav-item">
             <a href="{{url('admin/kategori/')}}" class="nav-link">
               <i class="nav-icon fa fa-user-circle-o"></i>
               <p>
@@ -152,7 +152,7 @@
                 
               </p>
             </a>
-          </li>
+          </li> -->
             </ul>
           </li>
 

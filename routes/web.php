@@ -52,6 +52,7 @@ Auth::routes();
 Route::get('/pengajar/dashboard', 'Auth\LoginController@index');
 // Route::get('/register','Auth\RegisterController@getprovinsi');
 Route::post('/register','Auth\RegisterController@daftar_baru');
+Route::post('/register/admin','Auth\RegisterController@daftar_baru_admin');
 Route::post('/login','Auth\LoginController@loginBiasa');
 Route::get('/logout', 'Auth\LoginController@logout');
  //fungsi cek user
@@ -95,4 +96,7 @@ Route::get('/pengajar/peserta','DasboardController@lihatpeserta');
 
 //DARI SI PETANI
 Route::get('admin/wilayah/show','WilayahController@wilayah_show');
+Route::get('admin/wilayah/tambah/kecamatan','WilayahController@tambah_kecamatan');
+Route::get('admin/daftar/petani','PetaniController@daftar_petani');
+Route::get('admin/daftar/petani/semua','PetaniController@daftar_petani_semua');
 

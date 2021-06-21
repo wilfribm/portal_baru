@@ -236,7 +236,7 @@
         </div>
 
         <div class="input-group mb-3 ">
-          <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Password">
+          <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

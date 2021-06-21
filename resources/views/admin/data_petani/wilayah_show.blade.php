@@ -19,7 +19,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <button class="btn btn-primary float-right dropdown-toggle" type="button" 
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Action
@@ -29,7 +29,7 @@
                               <div class="dropdown-divider"></div>
                                 
                             </div>
-                          </div>
+                          </div> -->
 
                         <div class="row">
                             <div class="col-12">
@@ -54,13 +54,16 @@
                                         <label class="control-label">Nama Kecamatan *</label>
                                          <select class="form-control" name="nama_kec" required>
                                             <option value="" disabled selected> Nama Kecamatan </option>
+                                             @foreach($kecamatan as $kc)
+                                                <option value="{{$kc->Nama_Kecamatan}}">{{$kc->Nama_Kecamatan}}</option>
+                                              @endforeach
                                         </select>
 
                                       </div>
                           <br>
                          
                             <div class="col-md-6"> 
-                                  <a class="btn btn-md btn-primary btn-sm" href="Kecamatan.php" style="margin-top: 33px;">Tambah Kecamatan</a>
+                                  <a class="btn btn-md btn-primary btn-sm"  href="{{url('admin/wilayah/tambah/kecamatan')}}" style="margin-top: 33px;">Tambah Kecamatan</a>
                             </div>
                           </div>
                           </div>
@@ -69,6 +72,9 @@
                                         <label class="control-label">Nama Kabupaten *</label>
                                          <select class="form-control" name="nama_kec" required>
                                             <option value="" disabled selected> Nama Kabupaten </option>
+                                            @foreach($kabupaten as $kb)
+                                                <option value="{{$kb->Nama_Kabupaten}}">{{$kb->Nama_Kabupaten}}</option>
+                                            @endforeach
                                         </select>
 
                                       </div>
@@ -84,6 +90,9 @@
                                         <label class="control-label">Nama Provinsi *</label>
                                          <select class="form-control" name="nama_kec" required>
                                             <option value="" disabled selected> Nama Provinsi </option>
+                                            @foreach($provinsi as $pv)
+                                                <option value="{{$pv->Nama_Provinsi}}">{{$pv->Nama_Provinsi}}</option>
+                                            @endforeach
                                         </select>
 
                                       </div>
