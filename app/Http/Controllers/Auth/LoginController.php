@@ -53,17 +53,27 @@ class LoginController extends Controller
         $role = DB::table('master_user_kat')
                         ->where('ID_User', $request->input('ID_User'))
                         ->first();
+
+        // $ID_User = DB::table('master_user')->where('ID_User', $request->input('ID_User'))
+        //                 ->first();
+        // $password = DB::table('master_user')->where('password', $request->input('password'))
+        //                 ->first();
         // $validasi = DB::table('master_user')
-        //     ->where('ID_User', '=', $ID_USer)
+        //     ->where('ID_User', '=', $ID_User)
         //     ->where('password', '=', $password)
         //     ->count();
+
         if($validasi){ //apakah ID_User tersebut ada atau tidak
-            //if(Hash::check($request->input('Password'), $validasi->ID_User->Password)){
+            // if(Hash::check($request->input('Password'), $validasi->ID_User->Password)){
+            // if(($request->input('Password'), $validasi->ID_User->Password)){
             if(sha1($request->input('Password')) == $validasi->ID_User->Password){
                 $request->session()->put('login','1');
                 $request->session()->put('ID_User',$request->input('ID_User'));
                 if ($role->ID_Kategori == 'ADP') {
                     return redirect('/admin/approval');
+
+                }elseif($role->ID_Kategori == 'PET'){
+                    return view('petani/dashboard_petani');
                 } else {
                     if ($validasi->ID_User->Tingkat_Priv == 1) {
                         return redirect('pengajar/dashboard');
@@ -74,9 +84,12 @@ class LoginController extends Controller
             } else{
                 return redirect(' ')->with('alert','Password atau User, Salah !');
             }
-        }else{
+        }
+        else{
             return redirect(' ')->with('alert','Password atau User, Salah !');
-    }
+        }
+
+
 }
         public function index(){
             if(!Session::get('login')){

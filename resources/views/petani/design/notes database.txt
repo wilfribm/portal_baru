@@ -1,0 +1,2 @@
+alter table trans_ang_petani add constraint id_kelompoktani_fk 
+foreign key (id_kelompoktani) references kelompok_tani (id_kelompoktani)

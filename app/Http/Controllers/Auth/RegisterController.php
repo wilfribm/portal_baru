@@ -91,7 +91,7 @@ class RegisterController extends Controller
         $nomor_telpon = $request->input('nomor_telpon');
         $Email = $request->input('Email');
         $foto = 'asal';
-        $ID_Kategori = 'TL';
+        $ID_Kategori = $request->input('ID_Kategori');
         //$hashpass=bcrypt($Password);
         $hashpass=sha1($Password);
 

@@ -50,6 +50,18 @@
     @endif
       <form action="{{route('register')}}" method="post">
          {{ csrf_field() }} 
+
+
+        <div class="input-group mb-3 {{$errors->has('ID_Kategori') ? ' has-error' : ''}}">
+          <select name="ID_Kategori" value="{{old('ID_Kategori')}}" id="ID_Kategori" class="form-control" placeholder="ID_Kategori">
+            <option>----Daftar Sebagai----</option>
+            <option value="PET">Petani</option>
+            <option value="TL">Pengajar</option>
+
+          </select>
+        </div>
+
+
         <div class="input-group mb-3 {{$errors->has('ID_user') ? ' has-error' : ''}}">
           <input id="ID_User" value="{{old('ID_User')}}" name="ID_User" type="text" class="form-control" placeholder="Username">
                     @if ($errors->has('ID_User'))
@@ -64,6 +76,8 @@
             </div>
           </div>
         </div>
+
+        
 
         <div class="input-group mb-3 {{$errors->has('nama') ? ' has-error' : ''}}">
           <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Name">
@@ -191,14 +205,14 @@
         </div>
         
 
-            <div class="input-group mb-3 {{$errors->has('jenis_kelamin') ? ' has-error' : ''}}">
-        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin">
-          <option>----Jenis Kelamin----</option>
-          <option value="1">laki-laki</option>
-          <option value="2">perempuan</option>
+              <div class="input-group mb-3 {{$errors->has('jenis_kelamin') ? ' has-error' : ''}}">
+              <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin">
+                <option>----Jenis Kelamin----</option>
+                <option value="1">laki-laki</option>
+                <option value="2">perempuan</option>
 
-        </select>
-      </div>
+              </select>
+            </div>
             <!-- <div class="input-group mb-3 {{$errors->has('ID_Kategori') ? ' has-error' : ''}}">
           <select name="ID_Kategori" value="{{old('ID_Kategori')}}" id="ID_Kategori" class="form-control" placeholder="ID_Kategori">
             <option>----Daftar Sebagai----</option>
