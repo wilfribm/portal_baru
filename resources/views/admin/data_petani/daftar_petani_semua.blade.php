@@ -1,6 +1,21 @@
 @extends('admin.layouts.admin_base')
 @section('content')
-    <h1 class="m-0 text-dark">Daftar Petani</h1>
+    <div class="row">
+        
+    
+    <div class="col-lg-6">
+       <h1 class="m-0 text-dark">Daftar Petani</h1> 
+    </div>
+    <div class="col-lg-6">
+        <nav class="navbar navbar-light bg-light" style="margin-left: 180px;">
+          <form class="form-inline" method="GET" action="{{url('/cari/petani/')}}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Nama Petani" aria-label="Search" name="cari" value="{{ old('cari') }}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 5px;">Cari</button>
+            <a href="{{url('admin/daftar/petani/semua')}}" class="btn btn-outline-warning my-2 my-sm-0">Reset</a>
+          </form>
+        </nav>
+    </div>
+    </div>
     <br>
 
     <div style="overflow-x:auto;">

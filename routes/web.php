@@ -99,12 +99,15 @@ Route::get('admin/wilayah/show','WilayahController@wilayah_show');
 Route::get('admin/wilayah/tambah/kecamatan','WilayahController@tambah_kecamatan');
 Route::get('admin/daftar/petani','PetaniController@daftar_petani');
 Route::get('admin/daftar/petani/semua','PetaniController@daftar_petani_semua');
+
 Route::get('detail/{id}','PetaniController@detail_petani');
 
 Route::get('ubah/{id}','PetaniController@ubah_petani');
 Route::post('update/{id}','PetaniController@ubah_petani_aksi');
 
 Route::get('hapus/{id}','PetaniController@hapus');
+
+Route::get('/cari/petani/','PetaniController@daftar_petani_semua');
 
 
 

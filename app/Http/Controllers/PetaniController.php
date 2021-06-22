@@ -17,7 +17,15 @@ class PetaniController extends Controller
     {
     	
     	$pagination = 10;
-    	$daftar = DB::TABLE('master_petani')->paginate($pagination);
+    	$cari = $request->cari;
+    	// $daftar = DB::TABLE('master_petani')->paginate($pagination);
+    	$daftar = DB::TABLE('master_petani')->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
+
+
+	// 	$cari_petani = DB::table('master_petani')
+	// ->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
+
+
     	// var_dump($daftar);
     	return view('admin.data_petani.daftar_petani_semua', compact('daftar'))->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
@@ -74,6 +82,22 @@ class PetaniController extends Controller
 
             return redirect('admin/daftar/petani/semua')->with('success', 'Petani berhasil di Hapus');
     }
+
+
+ //    public function cari(Request $request)
+	// {
+	// 	// menangkap data pencarian
+	// 	$cari = $request->cari;
+ 
+ //    		// mengambil data dari table petani sesuai pencarian data
+	// 	$daftar = DB::table('master_petani')
+	// 	->where('Nama_Petani','like',"%".$cari."%")
+	// 	->paginate();
+ 
+ //    		// mengirim data petani ke view petani
+	// 	return view('admin.data_petani.daftar_petani_semua', compact('daftar'));
+ 
+	// }
 
      
 }
