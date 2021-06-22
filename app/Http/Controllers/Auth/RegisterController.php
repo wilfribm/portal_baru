@@ -103,8 +103,6 @@ class RegisterController extends Controller
                     
         $kat=array('ID_User'=>$ID_User, 'ID_kategori'=>$ID_Kategori); 
 
-        $maspet = array('ID_User'=>$ID_User, 'Nama_Petani'=>$nama, 'Email'=>$Email, 'Alamat_Petani'=>$alamat, 'Provinsi'=>$provinsi, 'Nomor_Telpon'=>$nomor_telpon, 'Tanggal_Lahir'=>$tanggal_lahir, 'jns_kelamin'=>$jenis_kelamin);
-
         $count =DB::table('master_user')->where('ID_User', $ID_User)->count();
         
         if($count > 0){
@@ -114,8 +112,6 @@ class RegisterController extends Controller
                   
                     DB::table('master_user')->insert($m_user);
                     DB::table('master_detail_user')->insert($detail);
-                    DB::table('master_petani')->insert($maspet);
-
                     DB::table('master_user_kat')->insert($kat);
                    
                     return redirect(' ')->with('status','Selamat Anda berhasil Mendaftar Tunggu Konfirmasi Dari Admin ');         
@@ -124,7 +120,7 @@ class RegisterController extends Controller
     }
 
     public function daftar_baru_admin(Request $request){
-        $ID_User = $request->input('ID_User'); //OK
+        $ID_User = $request->input('ID_User');
         $Password = $request->input('password');
         $PIN = '123456'; 
         $jawaban = ' asal ';
@@ -140,7 +136,7 @@ class RegisterController extends Controller
         $nomor_telpon = $request->input('nomor_telpon');
         $Email = $request->input('Email');
         $foto = 'asal';
-        $ID_Kategori = $request->input('ID_Kategori'); //OK
+        $ID_Kategori = $request->input('ID_Kategori');
         //$hashpass=bcrypt($Password);
         $hashpass=sha1($Password);
 
@@ -149,8 +145,6 @@ class RegisterController extends Controller
         $detail=array('ID_User'=>$ID_User, 'nama'=>$nama,'jenis_kelamin'=>$jenis_kelamin,
                     'tanggal_lahir'=>$tanggal_lahir,'alamat'=>$alamat,'provinsi'=>$provinsi,'nomor_telpon'=>$nomor_telpon,'Email'=>$Email,
                     'kabupaten'=>$kabupaten,'kecamatan'=>$kecamatan,'kelurahan_desa'=>$kelurahan_desa,'foto'=>$foto);
-
-        $maspet = array('ID_User'=>$ID_User, 'Nama_Petani'=>$nama, 'Email'=>$Email, 'Alamat_Petani'=>$alamat, 'Provinsi'=>$provinsi, 'Nomor_Telpon'=>$nomor_telpon, 'Tanggal_Lahir'=>$tanggal_lahir, 'jns_kelamin'=>$jenis_kelamin);
                     
         $kat=array('ID_User'=>$ID_User, 'ID_kategori'=>$ID_Kategori); 
 
@@ -163,7 +157,6 @@ class RegisterController extends Controller
                   
                     DB::table('master_user')->insert($m_user);
                     DB::table('master_detail_user')->insert($detail);
-                    DB::table('master_petani')->insert($maspet);
                     DB::table('master_user_kat')->insert($kat);
                    
                     return redirect('admin/daftar/petani')->with('success', 'Tambah Petani Berhasil');         

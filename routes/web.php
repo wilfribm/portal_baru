@@ -29,6 +29,9 @@ Route::resource('admin/approval', 'ApprovalController');
 // Route::get('pengajar/upload_topik',function(){
 //     return view('pengajar/upload_topik');
 // });
+
+
+
 Route::get('pengajar/peserta',function(){
     return view('pengajar/peserta');
 });
@@ -99,12 +102,13 @@ Route::get('admin/wilayah/show','WilayahController@wilayah_show');
 Route::get('admin/wilayah/tambah/kecamatan','WilayahController@tambah_kecamatan');
 Route::get('admin/daftar/petani','PetaniController@daftar_petani');
 Route::get('admin/daftar/petani/semua','PetaniController@daftar_petani_semua');
-Route::get('detail/{id}','PetaniController@detail_petani');
-
-Route::get('ubah/{id}','PetaniController@ubah_petani');
-Route::post('update/{id}','PetaniController@ubah_petani_aksi');
-
-Route::get('hapus/{id}','PetaniController@hapus');
 
 
+//BERITA
+Route::get('admin/berita', 'BeritaController@index');
+Route::get('admin/berita/tambah', 'BeritaController@tambah');
+ Route::get('admin/berita/{id}','BeritaController@show');
 
+Route::resource('berita', 'BeritaController');
+Route::get('admin/berita/edit', 'BeritaController@edit');
+// Route::get('admin/berita/hapus/{id}', 'BeritaController@hapus');
