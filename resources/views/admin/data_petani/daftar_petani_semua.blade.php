@@ -42,9 +42,14 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <a class="btn btn-s btn-info btn-sm" href="KartuAnggotaTani/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;">Kartu Anggota</a><br>
-                                           <a class="btn btn-s btn-primary btn-sm" href="Detail_Petani/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;">Detail</a><br>
-                                           <a class="btn btn-s btn-danger btn-sm" href="HapusPetani/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;" onclick="return confirm('Anda Yakin?');">Hapus</a><br>
-                                           <a class="btn btn-s btn-warning btn-sm" href="EditPetani/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;">Ubah</a>
+                                           <a class="btn btn-s btn-primary btn-sm" href="/detail/{{$petani->ID_User}}"
+
+                                            
+                                            
+                                            style="margin-left: 10px; margin-top: 5px;">Detail</a><br>
+                                           <a class="btn btn-s btn-warning btn-sm" href="/ubah/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;">Ubah</a><br>
+                                           <a class="btn btn-s btn-danger btn-sm" href="{{url('hapus')}}/{{$petani->ID_User}}" style="margin-left: 10px; margin-top: 5px;" onclick="return confirm('Anda Yakin?');">Hapus</a><br>
+                                           
                                           <div class="dropdown-divider"></div>
                                             
                                         </div>
