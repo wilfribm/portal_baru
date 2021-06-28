@@ -94,7 +94,7 @@ Route::post('/pengajar/indexpertanyaan/simpan','PertanyaanController@simpan');
 Route::get('/pengajar/peserta','DasboardController@lihatpeserta');
 
 
-//DARI SI PETANI
+//DARI SI PETANI ADMIN
 Route::get('admin/wilayah/show','WilayahController@wilayah_show');
 Route::get('admin/wilayah/tambah/kecamatan','WilayahController@tambah_kecamatan');
 Route::get('admin/daftar/petani','PetaniController@daftar_petani');
@@ -102,12 +102,27 @@ Route::get('admin/daftar/petani/semua','PetaniController@daftar_petani_semua');
 
 Route::get('detail/{id}','PetaniController@detail_petani');
 
+
+
 Route::get('ubah/{id}','PetaniController@ubah_petani');
 Route::post('update/{id}','PetaniController@ubah_petani_aksi');
 
 Route::get('hapus/{id}','PetaniController@hapus');
 
 Route::get('/cari/petani/','PetaniController@daftar_petani_semua');
+
+Route::get('cetak/{id}','PetaniController@cetak');
+
+
+//HALAMAN PETANI
+Route::get('dashboard','PetaniController@dashboard_petani');
+
+
+Route::get('data/diri/{id}','PetaniProfileController@data_diri_petani');
+
+Route::get('ubah/profile/{id}','PetaniProfileController@ubah_profile');
+
+Route::post('/update/profile/{id}','PetaniProfileController@update_profile');
 
 
 

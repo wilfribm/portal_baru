@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DutaTani | Log in</title>
+  <title>DutaTani | Masuk</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="{{{ asset('img/favicon.ico') }}}">
@@ -37,7 +37,7 @@
             @endif
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Silakan Login</p>
 
       <form action="{{ route('login') }}" method="post">
          {{csrf_field()}} 
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="input-group mb-3 {{$errors->has('Password') ? ' has-error' : ''}}">
-          <input id="password" value="{{old('Password')}}" name="Password" type="password" class="form-control" placeholder="Password">
+          <input id="password" value="{{old('Password')}}" name="Password" type="password" class="form-control" placeholder="Kata Sandi">
           @if ($errors->has('Password'))
                     <span class="help-block">
                         <strong>{{$errors->first('Password')}}</strong>
@@ -73,13 +73,13 @@
             <div class="icheck-primary">
               <input name="remember" {{old('remember') ? 'checked' : ''}}  type="checkbox" id="remember">
               <label for="remember">
-                Remember Me
+                Ingat Saya
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
           </div>
           <!-- /.col -->
         </div>
@@ -100,7 +100,7 @@
         <a href="{{route('password.request')}}"> I forgot my password</a>
       </p> -->
       <p class="mb-0">
-        <a href="{{route('register')}}" class="text-center"> Register a new membership</a>
+        <a href="{{route('register')}}" class="text-center"> Daftar Akun Baru</a>
       </p>
     </div>
     <!-- /.login-card-body -->

@@ -49,6 +49,11 @@ class LoginController extends Controller
         $validasi = db::table('master_user')
                          ->where('ID_User', $request->input('ID_User'))
                          ->get()->first;
+        // //inijuga
+        // $petani = db::table('master_user')
+        //                  ->where('ID_User', $request->input('ID_User'))
+        //                  ->get()->first;
+        // //batashapus
 
         $role = DB::table('master_user_kat')
                         ->where('ID_User', $request->input('ID_User'))
@@ -85,6 +90,12 @@ class LoginController extends Controller
                 return redirect(' ')->with('alert','Password atau User, Salah !');
             }
         }
+        // //Tambah darisini
+        // elseif($petani){
+        //     if(sha1($request->input('Password')) == $petani->Password AND $request->input('ID_User') == $petani->ID_User ){
+        //         return view('petani/dashboard_petani');
+        //     }
+        // }// batas hapus
         else{
             return redirect(' ')->with('alert','Password atau User, Salah !');
         }

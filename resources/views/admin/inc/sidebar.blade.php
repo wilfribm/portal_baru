@@ -119,9 +119,18 @@
           </li> -->
           <li class="nav-item">
             <a href="{{url('admin/daftar/petani/')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>
+                Pendataan
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/daftar/petani/semua')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pendataan Petani
+                Lihat Data
                 
               </p>
             </a>

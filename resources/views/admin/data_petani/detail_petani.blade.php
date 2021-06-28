@@ -9,8 +9,10 @@
                         <!--konten-->
                             
                                    <div class="card" style="width: 18rem;">
+
+                                   
                                   <img class="card-img-top" 
-                                  src="{{asset('img/favicon.ico')}}" alt="Card image cap">
+                                  src="{{ asset('foto_petani/' . $detail_petani->Foto) }}" alt="Card image cap">
                                   <div class="card-body">
                                     <h5 class="card-title">ID User  : {{$detail_petani->ID_User}}</h5>
 
