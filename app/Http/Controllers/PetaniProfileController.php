@@ -110,5 +110,18 @@ class PetaniProfileController extends Controller
 
     }
 
+     public function lahan_petani(Request $request, $id)
+    {
+       
+        $id = $request->route('id');
+        // $data = DB::SELECT("SELECT * FROM master_detail_user WHERE ID_User = '$id_user'");
+       $lahan_petani = DB::table('master_petani')
+                ->where('ID_User', $id)
+                ->first();
+        
+        // var_dump($lahan_petani);
+         return view('petani.lahan', compact('lahan_petani'));
+    }
+
     
 }

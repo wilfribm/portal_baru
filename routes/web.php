@@ -114,6 +114,11 @@ Route::get('/cari/petani/','PetaniController@daftar_petani_semua');
 Route::get('cetak/{id}','PetaniController@cetak');
 
 
+Route::get('reset/password/{id}','PetaniController@reset_password');
+Route::post('reset/{id}','PetaniController@reset');
+Route::get('refresh/{id}','PetaniController@refresh_user');
+
+
 //HALAMAN PETANI
 Route::get('dashboard','PetaniController@dashboard_petani');
 
@@ -123,6 +128,8 @@ Route::get('data/diri/{id}','PetaniProfileController@data_diri_petani');
 Route::get('ubah/profile/{id}','PetaniProfileController@ubah_profile');
 
 Route::post('/update/profile/{id}','PetaniProfileController@update_profile');
+
+Route::get('lahan/petani/{id}','PetaniProfileController@lahan_petani');
 
 
 

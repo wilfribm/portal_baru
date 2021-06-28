@@ -8,6 +8,79 @@ use Illuminate\Support\Facades\DB;
 
 class PetaniController extends Controller
 {
+    public function reset_password(Request $request, $id)
+    {
+        $id = $request->route('id');
+        $user = DB::table('master_user')
+                ->where('ID_User', $id)
+                ->first();
+        return view('admin.data_petani.reset_password', compact('user'));
+    }
+
+    public function reset(Request $request, $id)
+    {
+        // $Password = $request->input('Password');
+        $Password = $request->Password;
+        $hashpass=sha1($Password);
+        $reset = DB::table('master_user')
+                ->where('ID_User', $id)
+                ->update(['Password'=> $hashpass]);
+        if($reset){
+        return back()->with('success', 'Password Berhasil Diubah');
+        }else{
+            echo "Gagal";
+        }
+
+    }
+    public function refresh_user(Request $request, $id){
+        $awal_data = DB::table('master_petani')->where('ID_User',$id)->first();
+        // var_dump($awal_data);
+        $ID_User_Det = $awal_data->ID_User;
+        $Nama_Petani = $awal_data->Nama_Petani;
+        $Alamat_Petani = $awal_data->Nama_Petani;
+        $Kabupaten = $awal_data->Kabupaten;
+        $Kecamatan = $awal_data->Kecamatan;
+        $Provinsi = $awal_data->Provinsi;
+        $Desa_Kelurahan = $awal_data->Desa_Kelurahan;
+
+        $nama_istri = $awal_data->Nama_Petani;
+        $jml_tng_kerja_musiman = $awal_data->jml_tng_kerja_musiman;
+        $jml_lahan = $awal_data->jml_lahan;
+        $Foto = 'asal';
+        $Nomor_Telpon = $awal_data->Nomor_Telpon;
+
+        $Pendidikan_Terakhir = $awal_data->Pendidikan_Terakhir;
+        $Jumlah_Tanggungan = $awal_data->Jumlah_Tanggungan;
+        $Email = $awal_data->Email;
+        $Agama = $awal_data->Agama;
+        $Tanggal_Lahir = $awal_data->Tanggal_Lahir;
+        $Deskripsi_Keahlian = $awal_data->Deskripsi_Keahlian;
+        $Status = $awal_data->Status;
+        $Jenis_Kelamin = $awal_data->jns_kelamin;
+
+        $awal_ket = DB::table('master_petani')->where('ID_User',$id)->first();
+        $ID_User_Get = $awal_ket->ID_User;
+        $ID_Kategori = 'PET';
+     
+         $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Pendidikan_Terakhir'=>$Pendidikan_Terakhir, 'Jumlah_Tanggungan'=>$Jumlah_Tanggungan, 'Agama'=>$Agama, 'Deskripsi_Keahlian'=>$Deskripsi_Keahlian, 'Status'=>$Status, 'nama_istri'=> $nama_istri, 'jml_tng_kerja_musiman'=>$jml_tng_kerja_musiman, 'jml_lahan'=>$jml_lahan, 'jns_kelamin'=>$Jenis_Kelamin,'Foto'=>$Foto);
+
+         // $detail=array('ID_User'=>$ID_User_Det,'nama'=>$Nama_Petani,
+         //            'tanggal_lahir'=>$Tanggal_Lahir,'alamat'=>$Alamat_Petani,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email,'jenis_kelamin'=>$Jenis_Kelamin,'Foto'=>$Foto);
+
+         $kat=array('ID_User'=>$ID_User_Get, 'ID_kategori'=>$ID_Kategori);
+
+         $detail=array('ID_User'=>$ID_User_Det, 'nama'=>$Nama_Petani,'jenis_kelamin'=>$Jenis_Kelamin,
+                    'tanggal_lahir'=>$Tanggal_Lahir,'provinsi'=>$Provinsi,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email,
+                    'kabupaten'=>$Kabupaten,'kecamatan'=>$Kecamatan,'kelurahan_desa'=>$Desa_Kelurahan,'Foto'=>$Foto); 
+
+        DB::table('master_petani')->where('ID_User', $id)->update($maspet);
+        DB::table('master_detail_user')->insert($detail);
+
+        DB::table('master_user_kat')->insert($kat);
+       
+        return back()->with('success', 'Ubah Petani Berhasil');
+                 
+    }
     public function daftar_petani()
     {
     	return view('admin.data_petani.daftar_petani');

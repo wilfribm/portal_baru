@@ -45,6 +45,16 @@
             </a>
           </li>
           <!-- <li class="nav-item">
+            
+            <a href="{{url('lahan/petani')}}/{{Session::get('ID_User')}}" class="nav-link">
+              <i class="nav-icon fas fa-map"></i>
+              <p>
+                Lahan
+                
+              </p>
+            </a>
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="{{url('admin/pertanyaan/')}}" class="nav-link">
               <i class="nav-icon fas fa-question-circle "></i>
               <p>

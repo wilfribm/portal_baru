@@ -54,7 +54,16 @@
                   </div>
                   <div class="col-mb-3">
                     <label>Agama</label>
-                    <input id="Agama" value="{{$ubah_petani->Agama}}" name="Agama" type="text" class="form-control" placeholder="Agama">
+                    <select class="form-control" id="exampleFormControlSelect1" name="Agama">
+                    <option>{{$ubah_petani->Agama}}</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Protestan">Protestan</option>
+                    <option value="Katolik">Katolik</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Buddha">Buddha</option>
+                    <option value="Khonghucu">Khonghucu</option>
+                  </select>
+                    
                   </div>
                   <div class="col-mb-3">
                     <label>Tanggal Lahir</label>

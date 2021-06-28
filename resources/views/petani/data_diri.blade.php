@@ -142,7 +142,7 @@
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <<a href="/ubah/profile/{{$detail->ID_User}}" class="btn btn-primary btn-lg" style="margin-left: 850px;" >Ubah Profile</a>
+                        <a href="/ubah/profile/{{$detail->ID_User}}" class="btn btn-primary btn-lg" style="margin-left: 850px;" >Ubah Profile</a>
                       </div>
                     </div>
                   </form>

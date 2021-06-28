@@ -79,7 +79,7 @@ class LoginController extends Controller
 
                 }elseif($role->ID_Kategori == 'PET'){
                     return view('petani/dashboard_petani');
-                } else {
+                }else {
                     if ($validasi->ID_User->Tingkat_Priv == 1) {
                         return redirect('pengajar/dashboard');
                     } else {
