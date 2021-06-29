@@ -13,7 +13,7 @@
 
                 </div>
                 <small>
-                <a class="fa fa-2x fa-list" href="{{url('admin/daftar/petani/semua')}}" style="margin-left: 10px;">  Daftar Petani</a>
+                <!-- <a class="fa fa-2x fa-list" href="{{url('admin/daftar/petani/semua')}}" style="margin-left: 10px;">  Daftar Petani</a> -->
                 </small>
                 <br><br>
          <div class="row">

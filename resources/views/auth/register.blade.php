@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DutaTani | Register</title>
+  <title>DutaTani | Registrasi</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="{{{ asset('img/favicon.ico') }}}">
@@ -39,7 +39,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Register a new Teacher</p>
+      <p class="login-box-msg">Daftar Akun Baru</p>
       @if (session('status'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('status') }}
@@ -63,7 +63,7 @@
 
 
         <div class="input-group mb-3 {{$errors->has('ID_user') ? ' has-error' : ''}}">
-          <input id="ID_User" value="{{old('ID_User')}}" name="ID_User" type="text" class="form-control" placeholder="Username">
+          <input id="ID_User" value="{{old('ID_User')}}" name="ID_User" type="text" class="form-control" placeholder="Username" required>
                     @if ($errors->has('ID_User'))
                     <span class="help-block">
                         <strong>{{$errors->first('ID_User')}}</strong>
@@ -80,7 +80,7 @@
         
 
         <div class="input-group mb-3 {{$errors->has('nama') ? ' has-error' : ''}}">
-          <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Name">
+          <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Nama" required>
                     @if ($errors->has('nama'))
                     <span class="help-block">
                         <strong>{{$errors->first('nama')}}</strong>
@@ -96,7 +96,7 @@
         
 
         <div class="input-group mb-3 {{$errors->has('Email') ? ' has-error' : ''}}">
-          <input id="Email" value="{{old('Email')}}" name="Email" type="Email" class="form-control" placeholder="Email">
+          <input id="Email" value="{{old('Email')}}" name="Email" type="Email" class="form-control" placeholder="Email" required>
                     @if ($errors->has('Email'))
                     <span class="help-block">
                         <strong>{{$errors->first('Email')}}</strong>
@@ -111,7 +111,7 @@
         </div>
 
         <div class="input-group mb-3 {{$errors->has('alamat') ? ' has-error' : ''}}">
-          <input id="alamat" value="{{old('alamat')}}" name="alamat" type="text" class="form-control" placeholder="Alamat">
+          <input id="alamat" value="{{old('alamat')}}" name="alamat" type="text" class="form-control" placeholder="Alamat" required>
                     @if ($errors->has('alamat'))
                     <span class="help-block">
                         <strong>{{$errors->first('alamat')}}</strong>
@@ -127,7 +127,7 @@
 
 
       <div class="input-group mb-3 {{$errors->has('provinsi') ? ' has-error' : ''}}">
-        <select name="provinsi" id="provinsi" class="form-control" placeholder="provinsi">
+        <select name="provinsi" id="provinsi" class="form-control" placeholder="provinsi" required>
           <option>---- Provinsi ----</option>
           <option value="ACEH">ACEH</option>
           <option value="BALI">BALI</option>
@@ -176,7 +176,7 @@
         </div> -->
 
         <div class="input-group mb-3 {{$errors->has('nomor_telpon') ? ' has-error' : ''}}">
-          <input id="nomor_telpon" value="{{old('nomor_telpon')}}" name="nomor_telpon" type="text" class="form-control" placeholder="Nomor Telfon">
+          <input id="nomor_telpon" value="{{old('nomor_telpon')}}" name="nomor_telpon" type="text" class="form-control" placeholder="Nomor Telfon" required>
                     @if ($errors->has('nomor_telpon'))
                     <span class="help-block">
                         <strong>{{$errors->first('nomor_telpon')}}</strong>
@@ -189,9 +189,10 @@
             </div>
           </div>
         </div>
-
+        <small><h5><small>Tanggal Lahir</small></h5></small>
         <div class="input-group mb-3 {{$errors->has('tanggal_lahir') ? ' has-error' : ''}}">
-          <input id="tanggal_lahir" value="{{old('tanggal_lahir')}}" name="tanggal_lahir" type="date" class="form-control" placeholder="Tanggal Lahir">
+
+          <input id="tanggal_lahir" value="{{old('tanggal_lahir')}}" name="tanggal_lahir" type="date" class="form-control" placeholder="Tanggal Lahir" required>
                     @if ($errors->has('tanggal_lahir'))
                     <span class="help-block">
                         <strong>{{$errors->first('tanggal_lahir')}}</strong>
@@ -206,7 +207,7 @@
         
 
               <div class="input-group mb-3 {{$errors->has('jenis_kelamin') ? ' has-error' : ''}}">
-              <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin">
+              <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" required>
                 <option>----Jenis Kelamin----</option>
                 <option value="1">laki-laki</option>
                 <option value="2">perempuan</option>
@@ -222,7 +223,7 @@
           </select>
         </div> -->
         <div class="input-group mb-3 {{$errors->has('password') ? ' has-error' : ''}}">
-          <input id="password" value="{{old('password')}}" name="password" type="password" class="form-control" placeholder="Password">
+          <input id="password" value="{{old('password')}}" name="password" type="password" class="form-control" placeholder="Kata Sandi" required>
           @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{$errors->first('password')}}</strong>
@@ -236,7 +237,7 @@
         </div>
 
         <div class="input-group mb-3 ">
-          <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Password">
+          <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Kata Sandi" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -247,7 +248,7 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
           </div>
           <!-- /.col -->
         </div>
@@ -269,7 +270,7 @@
         <a href="{{route('password.request')}}"> I forgot my password</a>
       </p> -->
       <p class="mb-0">
-        <a href="{{route('login')}}" class="text-center"> I already a teacher</a>
+        <a href="{{route('login')}}" class="text-center"> Sudah Memiliki Akun ?</a>
       </p>
       </div>
     </div>

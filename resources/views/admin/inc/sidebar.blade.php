@@ -119,9 +119,18 @@
           </li> -->
           <li class="nav-item">
             <a href="{{url('admin/daftar/petani/')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>
+                Pendataan
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/daftar/petani/semua')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pendataan Petani
+                Lihat Data
                 
               </p>
             </a>
@@ -198,7 +207,33 @@
               </li>
             </ul>
           </li> -->
-        </ul>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-align-justify"></i>
+              <p>
+                Landing Page
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{url('admin/berita/')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Berita
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/slide/')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Slideshow
+              </p>
+            </a>
+          </li>
+            </ul>
+          </li>
          
        
   
