@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
+    return view('landing_page/index');
+});
+Route::get('/','landingpageController@index');
+
+Route::get('/login', function () {
     return view('auth/login');
 });
+
 // Route::get('pengajar/dashboard',function(){
 //     return view('pengajar/dashboard');
 // });
@@ -133,5 +139,17 @@ Route::get('lahan/petani/{id}','PetaniProfileController@lahan_petani');
 Route::get('detail/lahan/{id}','PetaniProfileController@detail_lahan_petani');
 Route::get('cetak/petani/{id}','PetaniProfileController@cetak_petani');
 
+//BERITA
+Route::get('admin/berita', 'BeritaController@index');
+Route::get('admin/berita/tambah', 'BeritaController@tambah');
+Route::get('admin/berita/{id}','BeritaController@show');
+Route::resource('berita', 'BeritaController');
+Route::get('admin/berita/{id}/edit', 'BeritaController@edit');
 
-
+//SLIDESHOW
+Route::get('admin/slide', 'slideController@index');
+Route::get('admin/slide/tambah', 'slideController@tambah');
+Route::get('admin/slide/{id}','slideController@show');
+Route::resource('slide', 'slideController');
+Route::get('admin/slide/{id}/edit', 'slideController@edit');
+Route::get('index/berita/{id}','landingpageController@lihat');
