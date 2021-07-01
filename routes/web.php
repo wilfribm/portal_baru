@@ -130,6 +130,8 @@ Route::get('ubah/profile/{id}','PetaniProfileController@ubah_profile');
 Route::post('/update/profile/{id}','PetaniProfileController@update_profile');
 
 Route::get('lahan/petani/{id}','PetaniProfileController@lahan_petani');
+Route::get('detail/lahan/{id}','PetaniProfileController@detail_lahan_petani');
+Route::get('cetak/petani/{id}','PetaniProfileController@cetak_petani');
 
 
 

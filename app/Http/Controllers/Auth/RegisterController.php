@@ -75,6 +75,7 @@ class RegisterController extends Controller
         return view('/register');
         }
     public function daftar_baru(Request $request){
+
         $ID_User = $request->input('ID_User');
         $Password = $request->input('password');
         $PIN = '123456'; 
@@ -87,7 +88,9 @@ class RegisterController extends Controller
         $provinsi= $request->input('provinsi');
         $kabupaten = 'asal ';
         $kecamatan = 'asal ';
-        $kelurahan_desa = 'asal ';  
+        $kelurahan_desa = 'asal ';
+        $jumlah_lahan = 'Tidak Ada';  
+        $jumlah_tenaga = 'Tidak Ada';  
         $nomor_telpon = $request->input('nomor_telpon');
         $Email = $request->input('Email');
         $foto = 'asal';
@@ -103,13 +106,22 @@ class RegisterController extends Controller
                     
         $kat=array('ID_User'=>$ID_User, 'ID_kategori'=>$ID_Kategori); 
 
-        $maspet = array('ID_User'=>$ID_User, 'Nama_Petani'=>$nama, 'Email'=>$Email, 'Alamat_Petani'=>$alamat, 'Provinsi'=>$provinsi, 'Nomor_Telpon'=>$nomor_telpon, 'Tanggal_Lahir'=>$tanggal_lahir, 'jns_kelamin'=>$jenis_kelamin);
+        $maspet = array('ID_User'=>$ID_User, 'Nama_Petani'=>$nama, 'Email'=>$Email, 'Alamat_Petani'=>$alamat, 'Provinsi'=>$provinsi, 'Nomor_Telpon'=>$nomor_telpon, 'Tanggal_Lahir'=>$tanggal_lahir, 'jns_kelamin'=>$jenis_kelamin, 'jml_lahan'=>$jumlah_lahan, 'jml_tng_kerja_musiman'=>$jumlah_tenaga);
 
         $count =DB::table('master_user')->where('ID_User', $ID_User)->count();
+
+        $namatgl =DB::table('master_petani')
+            ->where('Nama_Petani', $nama)
+            ->where('Tanggal_Lahir', $tanggal_lahir)
+            ->count();
         
         if($count > 0){
-            return redirect('/register')->with('alert','Maaf Username ànda telah digunakan ');
-        }else{
+            return redirect('/register')->with('alert','Maaf Username anda telah digunakan ');
+        }elseif($namatgl > 0){
+            return redirect('/register')->with('alert','Maaf Anda Sudah Memiliki Akun');
+        }
+
+        else{
         
                   
                     DB::table('master_user')->insert($m_user);
@@ -118,7 +130,7 @@ class RegisterController extends Controller
 
                     DB::table('master_user_kat')->insert($kat);
                    
-                    return redirect(' ')->with('status','Selamat Anda berhasil Mendaftar Tunggu Konfirmasi Dari Admin ');         
+                    return redirect(' ')->with('status','Selamat Anda berhasil Mendaftar');         
         } 
                  
     }
