@@ -167,10 +167,18 @@ class RegisterController extends Controller
         $kat=array('ID_User'=>$ID_User, 'ID_kategori'=>$ID_Kategori); 
 
         $count =DB::table('master_user')->where('ID_User', $ID_User)->count();
+
+         $namatgl =DB::table('master_petani')
+            ->where('Nama_Petani', $nama)
+            ->where('Tanggal_Lahir', $tanggal_lahir)
+            ->count();
         
         if($count > 0){
             return redirect('/register')->with('alert','Maaf Username ànda telah digunakan ');
-        }else{
+        }elseif($namatgl > 0){
+            return redirect('/register')->with('alert','Maaf Anda Sudah Memiliki Akun');
+        }
+        else{
         
                   
                     DB::table('master_user')->insert($m_user);
