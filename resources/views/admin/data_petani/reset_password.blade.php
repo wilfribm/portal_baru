@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-pills">                     
-                        <h1>Reset Password</h1>
+                        <h1>Ganti Password</h1>
 
                         
                         <br>
@@ -25,11 +25,12 @@
                
                 <div class="col-mb-3">
                     <label>Password Baru</label>
-                    <input id="Nama_Petani" name="Password" type="text" class="form-control" placeholder="Password">
+                    <input id="Nama_Petani" name="Password" type="password" class="form-control" placeholder="Password">
                 </div>
                 
                   <div class="col-mb-3" style="margin-top: 10px;">
-                <input class="btn btn-primary btn-lg" type="submit" value="Ubah">
+                <input class="btn btn-primary btn-sm" type="submit" value="Ubah">
+                <a href="/detail/{{$user->ID_User}}" class="btn btn-warning btn-sm">Batal</a>
             </div>
 
             </form>

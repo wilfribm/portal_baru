@@ -33,9 +33,15 @@ class PetaniProfileController extends Controller
        $detail = DB::table('master_detail_user')
                 ->where('ID_User', $id)
                 ->first();
+        $lahan = DB::table('master_petani')
+                ->where('ID_User', $id)
+                ->first();
+        
         // var_dump($detail);
-         return view('petani.data_diri', compact('detail'));
+         return view('petani.data_diri', compact('detail','lahan'));
     }
+
+    
 
     public function ubah_profile(Request $request, $id)
     {
@@ -118,9 +124,16 @@ class PetaniProfileController extends Controller
        $lahan_petani = DB::table('master_petani')
                 ->where('ID_User', $id)
                 ->first();
-        
+
         // var_dump($lahan_petani);
          return view('petani.lahan', compact('lahan_petani'));
+    }
+
+    public function cetak_petani(Request $request, $id)
+    {
+        $id = $request->route('id');
+        $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
+        return view('petani.cetak_kartu_petani', compact('cetak'));
     }
 
     

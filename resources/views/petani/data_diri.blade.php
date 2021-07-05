@@ -22,7 +22,7 @@
                   <div class="text-center text-sm-left mb-2 mb-sm-0">
                     
                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{Session::get('ID_User')}} </h4>
-                   
+                    
                     <p class="mb-0">
                       </p>
                     <!-- <div class="text-muted"><small>Last seen 2 hours ago</small></div> -->
@@ -34,7 +34,15 @@
                     </div>
                   </div>
                   <div class="text-center text-sm-right">
-                    <span class="badge badge-secondary">Petani</span>
+                    <span class="#">
+                      <a href="{{url('cetak/petani')}}/{{$lahan->ID_User}}" class="btn btn-sm btn-info">Cetak Kartu Anggota</a>
+                      @if($lahan->Status == 1)
+                                        <a href="#" class="btn btn-sm btn-success"> Status : <b>Aktif</b></a>
+                                        @else
+                                        <a href="#" class="btn btn-sm btn-danger">Status : <b>Tidak Aktif</b></a>
+                                        @endif
+
+                    </span>
                     <!-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div> -->
                   </div>
                 </div>
@@ -129,6 +137,23 @@
                             </div>
                           </div>
                         </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Jumlah Lahan</label>
+                              <input class="form-control" type="text" name="jml_lahan" placeholder="Jumlah Lahan" value="{{$lahan->jml_lahan}}" readonly>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Jumlah Tenaga Kerja Musiman</label>
+                              <input class="form-control" type="text" name="jml_tng_kerja_musiman" placeholder="Jumlah Tenaga Kerja Musiman" value="{{$lahan->jml_tng_kerja_musiman}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        
+
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
@@ -143,6 +168,7 @@
                     <div class="row">
                       <div class="col d-flex justify-content-end">
                         <a href="/ubah/profile/{{$detail->ID_User}}" class="btn btn-primary btn-lg" style="margin-left: 850px;" >Ubah Profile</a>
+                        
                       </div>
                     </div>
                   </form>

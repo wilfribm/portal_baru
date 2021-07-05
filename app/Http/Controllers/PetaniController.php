@@ -107,6 +107,7 @@ class PetaniController extends Controller
     {
     	$detail_petani = DB::table('master_petani')->where('ID_User',$id)->first();
     	return view('admin.data_petani.detail_petani', compact('detail_petani'));
+       
     } 
 
 

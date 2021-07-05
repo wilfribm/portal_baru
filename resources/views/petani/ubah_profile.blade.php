@@ -80,12 +80,11 @@
                             <div class="form-group">
                               <label>Jenis Kelamin</label>
                               <select class="form-control" aria-label="Default select example" name="jenis_kelamin">
-                                <option value="1" <?php if($ambil->jenis_kelamin==1) ?> selected>Laki - Laki</option>
+                                <option value="1">Laki - Laki</option>
                                 <option value="2">Perempuan</option>
-                               
                               </select>
-                            
                             </div>
+                            
                           </div>
                           <div class="col">
                             <div class="form-group">
@@ -223,7 +222,9 @@
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
+                        <a href="{{url('data/diri')}}/{{Session::get('ID_User')}}" class="btn btn-success" style="margin-right: 5px;">Kembali</a>
                         <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                        
                       </div>
                     </div>
                   </form>
