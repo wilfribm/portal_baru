@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin_base')
+@extends('admin.layouts.admin_base_berita')
 
 @section('content')
     <a href="{{ url()->previous() }}" class="btn btn-light btn-sm">&laquo; Go Back</a>
@@ -14,7 +14,7 @@
 
         <div class="form-group">
             {{Form::label('isi', 'Isi Berita')}}
-            {{Form::textarea('isi', $berita->isi, ['class' => 'form-control', 'placeholder' => 'Isi Berita'])}}
+            {{Form::textarea('isi', $berita->isi, ['class' => 'form-control summernote', 'placeholder' => 'Isi Berita'])}}
         </div>
 
         <div class="form-group">

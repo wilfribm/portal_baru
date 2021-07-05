@@ -97,7 +97,7 @@
                                                 <label style="font-weight:bold;">Isi Berita</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                {{$berita->isi}}
+                                                {!!$berita->isi!!}
                                             </div>
                                         </div>
                                         <hr />

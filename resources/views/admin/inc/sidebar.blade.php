@@ -218,7 +218,7 @@
             <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="{{url('admin/berita/')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon far fa-newspaper"></i>
               <p>
                 Berita
               </p>
@@ -226,7 +226,7 @@
           </li>
           <li class="nav-item">
             <a href="{{url('admin/slide/')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-sliders-h"></i>
               <p>
                 Slideshow
               </p>

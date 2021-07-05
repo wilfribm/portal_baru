@@ -1,6 +1,7 @@
-@extends('admin.layouts.admin_base')
+@extends('admin.layouts.admin_base_berita')
 
 @section('content')
+
     <a href="{{ url()->previous() }}" class="btn btn-light btn-sm">&laquo; Go Back</a>
     <h1>Buat Berita</h1>
     {!! Form::open(['action' => '\App\Http\Controllers\BeritaController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
@@ -17,7 +18,7 @@
 
         <div class="form-group">
             {{Form::label('isi', 'Isi Berita')}}
-            {{Form::textarea('isi', '', ['class' => 'form-control', 'placeholder' => 'isi Berita'])}}
+            {{Form::textarea('isi', '', ['class' => 'form-control summernote', 'placeholder' => 'isi Berita'])}}
         </div>
 
         <div class="form-group">

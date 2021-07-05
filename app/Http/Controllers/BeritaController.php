@@ -9,34 +9,19 @@ use Carbon\Carbon;
 
 class BeritaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $data = DB::select("SELECT * FROM master_berita_informasi");
+        $data = DB::table('master_berita_informasi')
+        ->orderBy('id','ASC')
+        ->paginate(10);
         // $data = DB::table('master_berita_informasi');
         // var_dump($data);
         return view('admin.berita.index', compact('data'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function tambah(){
         return view('admin.berita.tambah');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function store(Request $request)
     {
@@ -54,15 +39,10 @@ class BeritaController extends Controller
         $getuser = $request->session()->get('ID_User');
 
         if ($request->hasFile('foto')) {
-            // Get File Name w/ Ext
             $filenameWithExt = $request->file('foto')->getClientOriginalName();
-            // Get Just File Name
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get Just Ext
             $extension = $request->file('foto')->getClientOriginalExtension();
-            // File Name To Store
             $fileNameToStore = $id_berita.'_'.$filename.'_'.time().'.'.$extension;
-            // Upload Image
             $store_location = 'foto_berita';
             $file = $request->file('foto');
             $file->move($store_location, $fileNameToStore);
@@ -137,16 +117,6 @@ class BeritaController extends Controller
         
         $mytime->toDateTimeString();
         $getuser = $request->session()->get('ID_User');
-
-        // DB::table('master_berita_informasi')
-        //         ->where('id', $id)
-        //         ->update([
-        //             'judul' => $request->judul,
-        //             'isi' => $request->isi,
-        //             'nik' => $getuser,
-        //             'foto' => $fileNameToStore,
-        //             'tanggal' => $mytime
-        //         ]);
         
         $foto = DB::table('master_berita_informasi')
                 ->where('id', $id)
@@ -160,8 +130,8 @@ class BeritaController extends Controller
                     'judul' => $request->judul,
                     'isi' => $request->isi,
                     'nik' => $getuser,
-                    'foto' => $fileNameToStore,
-                    'tanggal' => $mytime
+                    'foto' => $fileNameToStore
+                    // 'tanggal' => $mytime
                 ]);
             }
         }
@@ -169,12 +139,6 @@ class BeritaController extends Controller
         return redirect('/admin/berita')->with('success', 'Berita berhasil di Edit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
 
