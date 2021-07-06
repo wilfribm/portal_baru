@@ -23,10 +23,14 @@ class landingpageController extends Controller
             $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
             })
         ->count();
-        
-        $lahan = DB::table('master_peta_lahan')->count();
+
+        $lahan = DB::table('master_peta_lahan')
+        // ->join('master_peta_lahan_detail', function($join){
+        //     $join->on('master_peta_lahan_detail.id_lahan','=','master_peta_lahan.id_lahan');
+        // })
+        ->count();
+            
         $petani = DB::table('master_petani')->count();
-        
 
         return view('landing_page.index', compact('berita','materi','lahan','petani'),['slidesArray'=>$slidesArray]);
     }
@@ -59,7 +63,7 @@ class landingpageController extends Controller
     // }
 
     public function listMateri(Request $request){
-        $pagination = 10;
+        $pagination = 15;
     	$cari = $request->cari;
         $listMateri = DB::table('master_upload_materi')
         ->join('master_detail_user', function($join){
@@ -90,7 +94,4 @@ class landingpageController extends Controller
         return view('landing_page.detailMateri', compact('detailMateri'));
     }
 
-    public function profil(){
-        
-    }
 }
