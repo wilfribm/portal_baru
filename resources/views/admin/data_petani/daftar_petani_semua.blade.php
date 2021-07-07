@@ -30,6 +30,8 @@
                     <th scope="col">Provinsi</th>
                     <th scope="col">Desa / Kelurahan</th>
                     <th scope="col">Aksi</th>
+                    
+
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +79,7 @@
                                         
                                       
                                     </td>
+                                     
                                 </td>
                             </tr>
                 @endforeach

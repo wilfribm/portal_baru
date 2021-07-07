@@ -35,7 +35,7 @@
                   </div>
                   <div class="text-center text-sm-right">
                     <span class="#">
-                      <a href="{{url('cetak/petani')}}/{{$lahan->ID_User}}" class="btn btn-sm btn-info">Cetak Kartu Anggota</a>
+                      <a href="{{url('cetak/petani')}}/{{$lahan->ID_User}}" class="btn btn-sm btn-info" target="_blank">Cetak Kartu Anggota</a>
                       @if($lahan->Status == 1)
                                         <a href="#" class="btn btn-sm btn-success"> Status : <b>Aktif</b></a>
                                         @else

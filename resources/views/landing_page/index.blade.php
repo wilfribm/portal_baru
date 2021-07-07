@@ -79,7 +79,7 @@
         <div class="carousel-inner">
           @foreach($s as $slide => $slider)
           <div class="carousel-item {{$slide == 0 ? 'active' : '' }}">
-            <img class=" w-100" src="./../../foto_slide/{{$slider['foto']}}" alt="{{$slide['judul']}}">
+            
             <div class="carousel-caption">
               <h5 style="color:black;">{{$slider['judul']}}</h5>
               <p style="color:black;">{{$slider['keterangan']}}</p>
