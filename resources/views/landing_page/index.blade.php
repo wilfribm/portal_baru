@@ -8,10 +8,6 @@
           @foreach($slidesArray as $slide => $slider)
           <div class="carousel-item {{$slide == 0 ? 'active' : '' }}">
           <img class=" w-100" src="./../../foto_slide/{{$slider['foto']}}" alt="{{$slider['judul']}}">
-            <div class="carousel-caption">
-              <h5 style="color:black;">{{$slider['judul']}}</h5>
-              <p style="color:black;">{{$slider['keterangan']}}</p>
-            </div>
           </div>
           @endforeach
         </div>
@@ -23,7 +19,6 @@
           <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-          </a>
       </div>
     </header>
 
