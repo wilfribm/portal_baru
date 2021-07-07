@@ -11,7 +11,9 @@ class slideController extends Controller
 
     public function index()
     {
-        $data = DB::select("SELECT * FROM master_slideshow");
+        $data = DB::Table('master_slideshow')
+        ->orderBy('id','ASC')
+        ->paginate(10);
         return view('admin.slideshow.index', compact('data'));
     }
 

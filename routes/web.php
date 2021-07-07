@@ -152,4 +152,14 @@ Route::get('admin/slide/tambah', 'slideController@tambah');
 Route::get('admin/slide/{id}','slideController@show');
 Route::resource('slide', 'slideController');
 Route::get('admin/slide/{id}/edit', 'slideController@edit');
-Route::get('index/berita/{id}','landingpageController@lihat');
+
+Route::get('/listBerita','landingpageController@listBerita');
+Route::get('/listBerita/detailBerita/{id}','landingpageController@detailBerita');
+
+Route::get('/listMateri','landingpageController@listMateri');
+Route::get('/listMateri/cariMateri','landingpageController@listMateri');
+Route::get('/listMateri/detailMateri/{ID}','landingpageController@detailmateri');
+
+Route::get('/profil', function () {
+    return view('landing_page/profil');
+});

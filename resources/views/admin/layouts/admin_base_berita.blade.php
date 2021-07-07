@@ -19,6 +19,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> -->
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
+  <script>
+
+    jQuery(document).ready(function(){
+    $('.summernote').summernote({
+        height: 240,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: false                 // set focus to editable area after initializing summernote
+    });
+    });
+</script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -81,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="{{asset('/lte3/plugins/jquery/jquery.min.js') }}"></script>
+<!-- <script src="{{asset('/lte3/plugins/jquery/jquery.min.js') }}"></script> -->
 <!-- Bootstrap 4 -->
 <script src="{{asset('/lte3/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->

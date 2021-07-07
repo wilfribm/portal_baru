@@ -6,63 +6,92 @@ use Illuminate\Http\Request;
 use App\Charts\UserChart;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class landingpageController extends Controller
 {
     public function index(){
-        $data = DB::select("SELECT * FROM master_berita_informasi ORDER BY id DESC LIMIT 3");
+        $berita = DB::select("SELECT * FROM master_berita_informasi ORDER BY id DESC LIMIT 3");
         $slides = DB::select("SELECT * FROM master_slideshow ORDER BY id DESC LIMIT 3");
-        $s = json_decode(json_encode($slides),true);
+        $slidesArray = json_decode(json_encode($slides),true);
 
-        $materi = DB::table('master_topik')->count();
-        $lahan = DB::table('master_peta_lahan')->count();
+        $materi = DB::table('master_upload_materi')
+        ->join('master_detail_user', function($join){
+            $join->on('master_detail_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->join('master_user', function($join){
+            $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->count();
+
+        $lahan = DB::table('master_peta_lahan')
+        // ->join('master_peta_lahan_detail', function($join){
+        //     $join->on('master_peta_lahan_detail.id_lahan','=','master_peta_lahan.id_lahan');
+        // })
+        ->count();
+            
         $petani = DB::table('master_petani')->count();
 
-        // $showtopik = DB::table('master_topik')
-        //             ->join('master_kategori', 'master_kategori.ID_Kategori', '=', 'master_topik.ID_Kategori')  
-        //             ->get();
-        // dd($showtopik);
-        return view('landing_page.index', compact('data','materi','lahan','petani'),['s'=>$s]);
-
-        // $borderColors = [
-        //     "rgba(255, 99, 132, 1.0)",
-        //     "rgba(22,160,133, 1.0)",
-        //     "rgba(255, 205, 86, 1.0)",
-        //     "rgba(51,105,232, 1.0)",
-        //     "rgba(244,67,54, 1.0)",
-        //     "rgba(34,198,246, 1.0)",
-        //     "rgba(153, 102, 255, 1.0)",
-        //     "rgba(255, 159, 64, 1.0)",
-        //     "rgba(233,30,99, 1.0)",
-        //     "rgba(205,220,57, 1.0)"
-        // ];
-        // $fillColors = [
-        //     "rgba(255, 99, 132, 0.2)",
-        //     "rgba(22,160,133, 0.2)",
-        //     "rgba(255, 205, 86, 0.2)",
-        //     "rgba(51,105,232, 0.2)",
-        //     "rgba(244,67,54, 0.2)",
-        //     "rgba(34,198,246, 0.2)",
-        //     "rgba(153, 102, 255, 0.2)",
-        //     "rgba(255, 159, 64, 0.2)",
-        //     "rgba(233,30,99, 0.2)",
-        //     "rgba(205,220,57, 0.2)"
-
-        // ];
-        // $Chart = new UserChart;
-        // $Chart->minimalist(true);
-        // $Chart->labels($showtopik['id_ref']);
-        // $Chart->dataset('Jumlah materi', 'doughnut', [10, 25, 13])
-        //     ->color($borderColors)
-        //     ->backgroundcolor($fillColors);
-       
-        // return view('landing_page.index', compact('data'),['s'=>$s],[ 'Chart'=>$Chart ]);
+        return view('landing_page.index', compact('berita','materi','lahan','petani'),['slidesArray'=>$slidesArray]);
     }
 
-    public function lihat($id){
-        $berita = DB::table('master_berita_informasi')
+    public function listBerita(){
+        $listBerita = DB::table('master_berita_informasi')
+        ->orderBy('id','DESC')
+        ->paginate(10);
+        //$listBerita = DB::table('master_berita_informasi')->paginate(15);
+        return view('landing_page.listBerita', compact('listBerita'));
+    }
+
+    public function detailBerita($id){
+        $detailBerita = DB::table('master_berita_informasi')
                 ->where('id', $id)
                 ->first();
-        return view('landing_page.berita', compact('berita'));
+        return view('landing_page.detailBerita', compact('detailBerita'));
     }
+
+    // public function listMateri(){
+    //     $listMateri = DB::table('master_upload_materi')
+    //     ->join('master_detail_user', function($join){
+    //         $join->on('master_detail_user.ID_User', '=', 'master_upload_materi.ID_User');
+    //         })
+    //     ->join('master_user', function($join){
+    //         $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
+    //         })
+    //     ->paginate(10);
+    //     return view('landing_page.listMateri', compact('listMateri'));
+    // }
+
+    public function listMateri(Request $request){
+        $pagination = 15;
+    	$cari = $request->cari;
+        $listMateri = DB::table('master_upload_materi')
+        ->join('master_detail_user', function($join){
+            $join->on('master_detail_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->join('master_user', function($join){
+            $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->where('nama_materi','like','%'.$cari.'%')
+        ->orwhere('nama','like','%'.$cari.'%')
+        ->orwhere('create_at','like','%'.$cari.'%')
+        // ->orwhere('ID_User','nilla')
+        ->paginate($pagination);
+
+        return view('landing_page.listMateri', compact('listMateri'))->with('i', ($request->input('page', 1) - 1) * $pagination);
+    }
+
+    public function detailMateri($id){
+        $detailMateri= DB::table('master_upload_materi')
+            ->join('master_detail_user', function($join){
+            $join->on('master_detail_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+            ->join('master_user', function($join){
+            $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+            ->where('ID',$id)
+            ->get();
+        return view('landing_page.detailMateri', compact('detailMateri'));
+    }
+
 }
