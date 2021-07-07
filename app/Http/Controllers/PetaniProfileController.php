@@ -133,7 +133,9 @@ class PetaniProfileController extends Controller
     {
         $id = $request->route('id');
         $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
-        return view('petani.cetak_kartu_petani', compact('cetak'));
+        $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
+        
+        return view('petani.cetak_kartu_petani', compact('cetak','url'));
     }
 
     

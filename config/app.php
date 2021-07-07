@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Laravel Collective
         Collective\Html\HtmlServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
 
     ],
 
@@ -230,6 +231,8 @@ return [
         // Laravel Collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
     ],
 

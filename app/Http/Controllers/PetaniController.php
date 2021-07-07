@@ -353,7 +353,13 @@ class PetaniController extends Controller
 	public function cetak($id)
 	{
 		$cetak = DB::table('master_petani')->where('ID_User',$id)->first();
-		return view('admin.data_petani.cetak_kartu', compact('cetak'));
+        // $url = "www.google.com/$cetak->ID_User";
+        $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
+        $img = 'public/foto_petani/dutataniid-teks.png';
+        // var_dump($url);
+        $for = 'png';
+        $h = 'H';
+		return view('admin.data_petani.cetak_kartu', compact('cetak','url','img','for','h'));
 	}
 
 	public function dashboard_petani()
