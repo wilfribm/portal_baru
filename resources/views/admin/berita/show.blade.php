@@ -74,10 +74,10 @@
 
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">NIK</label>
+                                                <label style="font-weight:bold;">ID_User</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                {{$berita->NIK}}
+                                                {{$berita->ID_User}}
                                             </div>
                                         </div>
                                         <hr />
