@@ -11,7 +11,7 @@
                             <div class="d-flex justify-content-start">
                                 <div class="userData ml-3">
                                     <h2 class="d-block">{{$detailBerita->judul}}</h2>
-                                    <label style="font-weight:bold;">Oleh: {{$detailBerita->NIK}} | {{$detailBerita->tanggal}}</label>
+                                    <label style="font-weight:bold;">Oleh: {{$detailBerita->ID_User}} | {{$detailBerita->tanggal}}</label>
                                 </div>
                             </div>
 

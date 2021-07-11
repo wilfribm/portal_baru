@@ -18,7 +18,7 @@
                     <th scope="col">ID Berita</th> 
                     <th scope="col">Judul Berita</th>
                     <!-- <th scope="col">Isi Berita</th> -->
-                    <th scope="col">NIK</th>
+                    <th scope="col">User</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Action</th>
@@ -30,7 +30,7 @@
                         <td scope="row">{{$b->id}}</td>
                         <td scope="row">{{$b->judul}}</td>
                         <!-- <td scope="row">{{$b->isi}}</td> -->
-                        <td scope="row">{{$b->NIK}}</td>
+                        <td scope="row">{{$b->ID_User}}</td>
                         <td scope="row">{{$b->foto}}</td>
                         <td scope="row">{{$b->tanggal}}</td>
                         <td scope="row">

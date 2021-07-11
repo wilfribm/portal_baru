@@ -52,7 +52,7 @@ class BeritaController extends Controller
             DB::table('master_berita_informasi')->insert([
                 'judul' => $request->input('judul'),
                 'isi' => $request->input('isi'),
-                'nik' => $getuser,
+                'ID_User' => $getuser,
                 'foto' => $fileNameToStore,
                 'tanggal' => $mytime
             ]);
@@ -79,12 +79,9 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            // 'id' => '',
             'judul' => 'required',
             'isi' => 'required',
-            // 'nik' => '',
-            'foto' => 'required',
-            // 'tanggal' => 'required'
+            'foto' => 'required'
         ]);
 
         if ($request->hasFile('foto')) {
@@ -129,7 +126,7 @@ class BeritaController extends Controller
                 ->update([
                     'judul' => $request->judul,
                     'isi' => $request->isi,
-                    'nik' => $getuser,
+                    'ID_User' => $getuser,
                     'foto' => $fileNameToStore
                     // 'tanggal' => $mytime
                 ]);
