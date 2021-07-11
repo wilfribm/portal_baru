@@ -35,7 +35,17 @@
                     <div>{{Session::get('alert-success')}}</div>
                 </div>
             @endif
+
   </div>
+  @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
@@ -48,13 +58,13 @@
         </button>
     </div>
     @endif
-      <form action="{{route('register')}}" method="post">
+      <form action="{{route('register')}}" method="post" name="myForm">
          {{ csrf_field() }} 
 
 
         <div class="input-group mb-3 {{$errors->has('ID_Kategori') ? ' has-error' : ''}}">
           <select name="ID_Kategori" value="{{old('ID_Kategori')}}" id="ID_Kategori" class="form-control" placeholder="ID_Kategori">
-            <option>----Daftar Sebagai----</option>
+            <option value="1">----Daftar Sebagai----</option>
             <option value="PET">Petani</option>
             <option value="TL">Pengajar</option>
 
@@ -80,7 +90,7 @@
         
 
         <div class="input-group mb-3 {{$errors->has('nama') ? ' has-error' : ''}}">
-          <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Nama" required>
+          <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Nama" required >
                     @if ($errors->has('nama'))
                     <span class="help-block">
                         <strong>{{$errors->first('nama')}}</strong>
@@ -128,7 +138,7 @@
 
       <div class="input-group mb-3 {{$errors->has('provinsi') ? ' has-error' : ''}}">
         <select name="provinsi" id="provinsi" class="form-control" placeholder="provinsi" required>
-          <option>---- Provinsi ----</option>
+          <option value="1">---- Provinsi ----</option>
           <option value="ACEH">ACEH</option>
           <option value="BALI">BALI</option>
           <option value="BANTEN">BANTEN</option>
@@ -142,7 +152,7 @@
           <option value="JAWA TIMUR">JAWA TIMUR</option>
           <option value="KALIMANTAN BARAT">KALIMANTAN BARAT</option>
           <option value="KALIMANTAN SELATAN">KALIMANTAN SELATAN</option>
-          <option value="KALIMANTAN TENGAH">KALIMANTAN TENGAH/option>
+          <option value="KALIMANTAN TENGAH">KALIMANTAN TENGAH</option>
           <option value="KALIMANTAN TIMUR">KALIMANTAN TIMUR</option>
           <option value="KALIMANTAN UTARA">KALIMANTAN UTARA</option>
           <option value="KEPULAUAN BANGKA BELITUNG">KEPULAUAN BANGKA BELITUNG</option>
@@ -174,6 +184,8 @@
             </div>
           </div>
         </div> -->
+
+        <input type="text" name="">
 
         <div class="input-group mb-3 {{$errors->has('nomor_telpon') ? ' has-error' : ''}}">
           <input id="nomor_telpon" value="{{old('nomor_telpon')}}" name="nomor_telpon" type="text" class="form-control" placeholder="Nomor Telfon" required>
@@ -208,7 +220,7 @@
 
               <div class="input-group mb-3 {{$errors->has('jenis_kelamin') ? ' has-error' : ''}}">
               <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" required>
-                <option>----Jenis Kelamin----</option>
+                <option value="tidakada">----Jenis Kelamin----</option>
                 <option value="1">laki-laki</option>
                 <option value="2">perempuan</option>
 
@@ -224,11 +236,7 @@
         </div> -->
         <div class="input-group mb-3 {{$errors->has('password') ? ' has-error' : ''}}">
           <input id="password" value="{{old('password')}}" name="password" type="password" class="form-control" placeholder="Kata Sandi" required>
-          @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{$errors->first('password')}}</strong>
-                    </span>
-                    @endif
+          
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -236,19 +244,22 @@
           </div>
         </div>
 
-        <div class="input-group mb-3 ">
-          <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Kata Sandi" required>
+        <div class="input-group mb-3 {{$errors->has('password_confirmation') ? ' has-error' : ''}}">
+
+          <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Kata Sandi" required>
+
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+
         </div>
 
         <div class="row">
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+            <button type="submit" class="btn btn-primary btn-block" onclick="checkName();">Daftar</button>
           </div>
           <!-- /.col -->
         </div>
@@ -278,6 +289,92 @@
   </div>
 </div>
 <!-- /.login-box -->
+<!-- <script>
+function checkName() {
+    var x = document.myForm;
+    // var input = x.ID_User.value;
+    // var innama = x.nama.value;
+
+    var errMsgHolder = document.getElementById('nameErrMsg');
+
+    //ID USER VALIDASI
+    // if (input.length < 3) {
+        
+    //     // text = "Username Kurang dari 3";
+    //     alert("Username kurang dari 3");
+    //     return false;
+    //     // return back("{{route('register')}}");
+    // }
+    // else if (input.length > 10) {
+    //     alert("Username tidak boleh lebih dari 10 ");
+    //     return false;
+    // }
+    // else if (!(/^\S{3,}$/.test(input))) {
+    //     alert("Username Tidak boleh ada spasi");
+    //     return false;
+    // }
+
+    //NAMA VALIDASI
+    // var validasiHuruf = /^[a-zA-Z ]+$/;
+    // var validasiHuruf = /^[0-9]+$/;
+    // if (innama.length > 30) {
+    //     alert("Nama akan dipotong karena melebihi batas maksimal ");
+    //     return false;
+    // }else if(innama.match(validasiHuruf) ){
+    //   alert("Nama Harus mengandung huruf");
+    //   return false;
+    // }
+
+
+    //PROVINSI VALIDASI
+    var prov = x.provinsi.value;
+    var valueprov = /---- Provinsi ----/;
+    if(prov.match(valueprov)){
+      alert("Provinsi Belum dipilih ");
+        return false;
+      }
+
+    //NO HP VALIDASI
+    // var nohp = x.nomor_telpon.value;
+    // var valuenohp = /^[A-Za-z]+$/;
+
+    // if(nohp.match(valuenohp)){
+    //   alert("Nomor Tidak Boleh mengandung Huruf");
+    //   return false;
+    // }else if(nohp.length < 11){
+    //   alert("Nomor Tidak Valid");
+    //   return false;
+    // }else if(nohp.length > 12){
+    //   alert("Nomor Tidak Valid / Melebihi Batas");
+    //   return false;
+    }
+
+
+    //JENIS KELAMIN VALIDASI
+    var jns = x.jenis_kelamin.value;
+    var valuejns = /----Jenis Kelamin----/;
+    if(jns.match(valuejns)){
+      alert("Jenis Kelamin Belum dipilih");
+      return false;
+    }
+
+    //PASSWORD VALIDASI
+    // var passw = x.password.value;
+    // var passc = x.password_confirmation.value;
+    // if(passw.length < 3){
+    //   alert("Password minimal 3 karakter");
+    //   return false;
+    
+    // }
+
+    
+    
+}
+
+    
+
+  
+</script> -->
 
 <!-- jQuery -->
 <script src="lte3/plugins/jquery/jquery.min.js"></script>

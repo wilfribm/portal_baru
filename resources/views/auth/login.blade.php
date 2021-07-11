@@ -25,14 +25,34 @@
     <a href="/"><b>Duta</b>Tani</a>
   </div>
   <!-- /.login-logo -->
-  @if(\Session::has('alert'))
-                <div class="alert alert-danger">
-                    <div>{{Session::get('alert')}}</div>
+    <!-- @if(\Session::has('alert'))
+                  <div class="alert alert-danger">
+                      <div>{{Session::get('alert')}}</div>
+                  </div>
+              @endif
+              @if(\Session::has('alert-success'))
+                  <div class="alert alert-success">
+                      <div>{{Session::get('alert-success')}}</div>
+                  </div>
+              @endif -->
+              @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        {{$error}}
+                    </div>
+                @endforeach
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{session('success')}}
                 </div>
             @endif
-            @if(\Session::has('alert-success'))
-                <div class="alert alert-success">
-                    <div>{{Session::get('alert-success')}}</div>
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show">
+                    {{session('error')}}
                 </div>
             @endif
   <div class="card">
@@ -71,10 +91,15 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input name="remember" {{old('remember') ? 'checked' : ''}}  type="checkbox" id="remember">
+              <!-- <input name="remember" {{old('remember') ? 'checked' : ''}}  type="checkbox" id="remember_me">
               <label for="remember">
                 Ingat Saya
-              </label>
+              </label> -->
+              <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="remember_me" style="margin-left: -25px;"> Ingat Saya
+            </label>
+
+
             </div>
           </div>
           <!-- /.col -->
@@ -107,7 +132,37 @@
   </div>
 </div>
 <!-- /.login-box -->
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
+ <script>
+            $(function() {
+ 
+                if (localStorage.chkbx && localStorage.chkbx != '') {
+                    $('#remember_me').attr('checked', 'checked');
+                    $('#xip_Name').val(localStorage.ID_User);
+                    $('#xip_Password').val(localStorage.password);
+                } else {
+                    $('#remember_me').removeAttr('checked');
+                    $('#xip_Name').val('');
+                    $('#xip_Password').val('');
+                }
+ 
+                $('#remember_me').click(function() {
+ 
+                    if ($('#remember_me').is(':checked')) {
+                        // save username and password
+                        localStorage.ID_User = $('#xip_Name').val();
+                        localStorage.password = $('#xip_Password').val();
+                        localStorage.chkbx = $('#remember_me').val();
+                    } else {
+                        localStorage.ID_User = '';
+                        localStorage.password = '';
+                        localStorage.chkbx = '';
+                    }
+                });
+            });
+ 
+        </script>
 <!-- jQuery -->
 <script src="lte3/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

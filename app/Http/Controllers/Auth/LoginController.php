@@ -83,11 +83,18 @@ class LoginController extends Controller
                     if ($validasi->ID_User->Tingkat_Priv == 1) {
                         return redirect('pengajar/dashboard');
                     } else {
-                        return redirect(' ')->with('alert','Akun anda belum di Approve Admin !');
+                        return redirect('/login')->with('error','Akun anda belum di Approve Admin !');
                     }
                 }
             } else{
-                return redirect(' ')->with('alert','Password atau User, Salah !');
+                $u = $request->input('ID_User');
+                $p = $request->input('Password');
+                $sqlLogin = DB::SELECT("SELECT * FROM master_user WHERE ID_User= '$u' AND password='$p'");
+                
+                if($sqlLogin > 0){
+
+                return redirect('/login')->with('error','Password atau User, Salah !');
+                }
             }
         }
         // //Tambah darisini
@@ -97,7 +104,15 @@ class LoginController extends Controller
         //     }
         // }// batas hapus
         else{
-            return redirect(' ')->with('alert','Password atau User, Salah !');
+            $u = $request->input('ID_User');
+                $p = $request->input('Password');
+                $sqlLogin = DB::SELECT("SELECT * FROM master_user WHERE ID_User= '$u' AND password='$p'");
+
+                if($sqlLogin > 0){
+                    
+                return redirect('/login')->with('error','Password atau User, Salah !');
+                }
+            // return redirect('/login')->with('success','Password atau User, Salah !');
         }
 
 
@@ -112,7 +127,7 @@ class LoginController extends Controller
         }
         public function logout(){
             Session::flush();
-            return redirect(' ')->with('success','Kamu sudah logout');
+            return redirect('/login')->with('success','Kamu sudah logout');
         }
 
 }

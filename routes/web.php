@@ -11,6 +11,18 @@
 |
 */
 
+use App\Http\Controllers\RegisCobaController;
+use Illuminate\Support\Facades\Route;
+
+
+// Route::get("user", [RegisCobaController::class, 'create']);
+
+// Route::post("user/create", [RegisCobaController::class, 'store']);
+
+Route::get('/user','Auth\RegisCobaController@create');
+Route::post('/user/create','Auth\RegisCobaController@store');
+
+
 Route::get('/', function () {
     return view('landing_page/index');
 });

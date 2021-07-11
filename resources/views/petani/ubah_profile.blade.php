@@ -57,8 +57,9 @@
                           <div class="col">
                             <div class="form-group">
                               <label for="formFile" class="form-label">Ganti Foto</label>
-
-                              <input class="form-control" type="file" id="formFile" name="Foto" value="{{$ambil->Foto}}">
+                              <div id="preview"></div>
+                              <input class="form-control" type="file" name="Foto" value="{{$ambil->Foto}}" id="file" onchange="return validasiEkstensi()">
+                              
 
                             </div>          
                           </div>
@@ -228,6 +229,29 @@
                       </div>
                     </div>
                   </form>
+                  
+                  <script type="text/javascript">
+                    function validasiEkstensi(){
+    var inputFile = document.getElementById('file');
+    var pathFile = inputFile.value;
+    var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!ekstensiOk.exec(pathFile)){
+        alert('Silakan upload file yang memiliki ekstensi .jpg/.png');
+        inputFile.value = '';
+        return false;
+    }else{
+        // Preview gambar
+        if (inputFile.files && inputFile.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').innerHTML = '<img src="'+e.target.result+'" style="height:200px"/>';
+            };
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    }
+}
+                  </script>
+
                  
 
                 </div>
