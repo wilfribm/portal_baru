@@ -74,11 +74,11 @@
 
         <div class="input-group mb-3 {{$errors->has('ID_user') ? ' has-error' : ''}}">
           <input id="ID_User" value="{{old('ID_User')}}" name="ID_User" type="text" class="form-control" placeholder="Username" required>
-                    @if ($errors->has('ID_User'))
+                    <!-- @if ($errors->has('ID_User'))
                     <span class="help-block">
                         <strong>{{$errors->first('ID_User')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
@@ -91,11 +91,11 @@
 
         <div class="input-group mb-3 {{$errors->has('nama') ? ' has-error' : ''}}">
           <input id="nama" value="{{old('nama')}}" name="nama" type="text" class="form-control" placeholder="Nama" required >
-                    @if ($errors->has('nama'))
+                    <!-- @if ($errors->has('nama'))
                     <span class="help-block">
                         <strong>{{$errors->first('nama')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
@@ -107,11 +107,11 @@
 
         <div class="input-group mb-3 {{$errors->has('Email') ? ' has-error' : ''}}">
           <input id="Email" value="{{old('Email')}}" name="Email" type="Email" class="form-control" placeholder="Email" required>
-                    @if ($errors->has('Email'))
+                    <!-- @if ($errors->has('Email'))
                     <span class="help-block">
                         <strong>{{$errors->first('Email')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
@@ -122,11 +122,11 @@
 
         <div class="input-group mb-3 {{$errors->has('alamat') ? ' has-error' : ''}}">
           <input id="alamat" value="{{old('alamat')}}" name="alamat" type="text" class="form-control" placeholder="Alamat" required>
-                    @if ($errors->has('alamat'))
+                    <!-- @if ($errors->has('alamat'))
                     <span class="help-block">
                         <strong>{{$errors->first('alamat')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
@@ -189,11 +189,11 @@
 
         <div class="input-group mb-3 {{$errors->has('nomor_telpon') ? ' has-error' : ''}}">
           <input id="nomor_telpon" value="{{old('nomor_telpon')}}" name="nomor_telpon" type="text" class="form-control" placeholder="Nomor Telfon" required>
-                    @if ($errors->has('nomor_telpon'))
+                    <!-- @if ($errors->has('nomor_telpon'))
                     <span class="help-block">
                         <strong>{{$errors->first('nomor_telpon')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
@@ -205,11 +205,11 @@
         <div class="input-group mb-3 {{$errors->has('tanggal_lahir') ? ' has-error' : ''}}">
 
           <input id="tanggal_lahir" value="{{old('tanggal_lahir')}}" name="tanggal_lahir" type="date" class="form-control" placeholder="Tanggal Lahir" required>
-                    @if ($errors->has('tanggal_lahir'))
+                    <!-- @if ($errors->has('tanggal_lahir'))
                     <span class="help-block">
                         <strong>{{$errors->first('tanggal_lahir')}}</strong>
                     </span>
-                    @endif
+                    @endif -->
 
           <div class="input-group-append">
             <div class="input-group-text">
