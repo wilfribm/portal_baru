@@ -185,7 +185,7 @@
           </div>
         </div> -->
 
-        <input type="text" name="">
+        
 
         <div class="input-group mb-3 {{$errors->has('nomor_telpon') ? ' has-error' : ''}}">
           <input id="nomor_telpon" value="{{old('nomor_telpon')}}" name="nomor_telpon" type="text" class="form-control" placeholder="Nomor Telfon" required>

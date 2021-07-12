@@ -214,13 +214,16 @@ class RegisterController extends Controller
 
             $idk = 'ID_Kategori' => 'required|regex:/^[a-zA-Z]+$/u',
 
-            $nm = 'nama' => 'required|regex:/^[a-zA-Z]+$/u',
+            $nm = 'nama' => 'required|regex:/^[a-zA-Z ]*$/|max:30|min:3',
+            
             
             $nt = 'nomor_telpon'=>'required|regex:/^[0-9]+$/|min:10|max:12',
 
             $jk = 'jenis_kelamin'=>'required|regex:/^[1-2]+$/',
 
-            $pv = 'provinsi' => 'required|regex:/^[a-zA-Z]+$/u',
+            $pv = 'provinsi' => 'required|regex:/^[a-zA-Z ]*$/',
+
+            
             
 
             // 'email' => 'required|email|unique:users',
@@ -241,6 +244,8 @@ class RegisterController extends Controller
 
             'nama.required' => 'Nama Harus diisi',
             'nama.regex' => 'Nama Harus Mengandung Huruf',
+            'nama.max' => 'Nama Tidak Valid',
+            'nama.min' => 'Nama Tidak Valid',
 
             'jenis_kelamin.regex' => 'Jenis Kelamin Belum dipilih',
 
@@ -374,7 +379,7 @@ class RegisterController extends Controller
                    if($ID_Kategori == 'PET'){
                     return redirect('/login')->with('success','Selamat Anda berhasil Mendaftar Sebagai Petani, Silakan Login ');
                 }else{
-                    return redirect('/login')->with('success','Selamat Anda berhasil Mendaftar Sebagai Pengajar, Silakan Login ');
+                    return redirect('/login')->with('success','Selamat Anda berhasil Mendaftar Sebagai Pengajar, Akun Belum Approve');
                 }
                              
         } 
