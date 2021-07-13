@@ -27,7 +27,7 @@
                     <tr>                
                         <td scope="row">{{$slide->id}}</td>
                         <td scope="row">{{$slide->judul}}</td>
-                        <td scope="row">{{$slide->judul}}</td>
+                        <td scope="row">{{$slide->keterangan}}</td>
                         <td scope="row">{{$slide->foto}}</td>
                         <td scope="row">
                             <a href="slide/{{$slide->id}}" class="btn btn-primary btn-sm float-left">Open</a>

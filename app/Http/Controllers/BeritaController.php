@@ -81,56 +81,21 @@ class BeritaController extends Controller
         $this->validate($request, [
             'judul' => 'required',
             'isi' => 'required',
-            'foto' => 'required'
+            'foto' => ''
         ]);
 
-        if ($request->hasFile('foto')) {
-            $foto = DB::table('master_berita_informasi')
-                ->where('id', $id)
-                ->first();
-
-            if (!empty($foto)) {
-                $image_path = public_path().'/foto_berita'.'/'.$foto->foto;
-                if (file_exists($image_path)) {
-                    unlink($image_path);
-                }
-            }
-            
-            // Get File Name w/ Ext
-            $filenameWithExt = $request->file('foto')->getClientOriginalName();
-            // Get Just File Name
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get Just Ext
-            $extension = $request->file('foto')->getClientOriginalExtension();
-            // File Name To Store
-            $fileNameToStore = $id.'_'.$filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $store_location = 'foto_berita';
-            $file = $request->file('foto');
-            $file->move($store_location, $fileNameToStore);
-        }
-
-        $mytime = Carbon::now('Asia/Jakarta');
-        
-        $mytime->toDateTimeString();
-        $getuser = $request->session()->get('ID_User');
-        
-        $foto = DB::table('master_berita_informasi')
-                ->where('id', $id)
-                ->first();
-        
-        if (!empty($foto)) {
-            if ($request->hasFile('foto')) {
-                DB::table('master_berita_informasi')
-                ->where('id', $id)
-                ->update([
-                    'judul' => $request->judul,
-                    'isi' => $request->isi,
-                    'ID_User' => $getuser,
-                    'foto' => $fileNameToStore
-                    // 'tanggal' => $mytime
-                ]);
-            }
+        $judul =$request->input('judul');
+        $isi =$request->input('isi');
+        $foto  = $request->file('foto');
+        if(!empty($foto))
+        {
+            $namaFoto   = $foto->getClientOriginalName();
+            $foto->move(\base_path() ."/public/foto_berita", $namaFoto);
+            $update = array('judul'=>$judul, 'isi'=>$isi, 'foto'=>$namaFoto);
+            DB::table('master_berita_informasi')->where('id', $id)->update($update);
+        }else{
+            $update = array('judul'=>$judul, 'isi'=>$isi);
+            DB::table('master_berita_informasi')->where('id', $id)->update($update);
         }
         
         return redirect('/admin/berita')->with('success', 'Berita berhasil di Edit');

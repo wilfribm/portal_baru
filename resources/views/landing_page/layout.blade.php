@@ -95,7 +95,7 @@
 
             <div class="col-sm">
               
-              <a href="/" class="footer-logo"><img src="{{asset('img/duta.png')}}" style="width: 45%;height:40%;"/></a>
+              <a href="/" class="footer-logo"><img src="{{asset('img/duta.png')}}" style="width: 20%;height:35%;"/></a>
               <p>Jl. dr. Wahidin Sudirohusodo no. 5-25 <br/>
                 Yogyakarta, Indonesia – 55224
               </p>
@@ -110,7 +110,7 @@
                 <li><a href="#">Supplier</a></li>
               </ul>
             </div> -->
-            <div class="col-sm">
+            <!-- <div class="col-sm">
               <h3>MENU</h3>
               <ul class="list-unstyled links">
                 <li><a href="/listBerita" style="text-decoration: none;">Berita</a></li>
@@ -118,7 +118,7 @@
                 <li><a href="/listMateri" style="text-decoration: none;">Materi</a></li>
                 <li><a href="/login" style="text-decoration: none;">Login</a></li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

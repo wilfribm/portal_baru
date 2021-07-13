@@ -26,6 +26,7 @@
                             <th scope="col" class="text-center">Nama Materi</th>
                             <th scope="col" class="text-center">Penulis</th>
                             <th scope="col" class="text-center">Tanggal</th>
+                            <th scope="col" class="text-center">File</th>
                             <th scope="col" class="text-center">Detail</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                             <td scope="row">{{ $data->nama_materi }}</td>
                             <td scope="row">{{ $data->nama }}</td>
                             <td scope="row">{{ $data->create_at }}</td>
+                            <td class="text-center"><a href=""><i class="far fa-file-pdf"></i> PDF</a></td>
                             <td class="text-center"><a href="/listMateri/detailMateri/{{$data->ID}}"><button class="btn btn-primary" style="background-color:#049c44;color:white;">Buka</button></a></td>
                         </tr>
                         @endforeach

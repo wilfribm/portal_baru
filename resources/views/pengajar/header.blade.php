@@ -114,13 +114,13 @@
       </li> -->
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="{{asset('/lte3/dist/img/default.png') }}" class="user-image img-circle elevation-2" alt="User Image">
+          <img src="{{asset('foto_pengajar/' . $fotoprofil->Foto) }}" class="user-image img-circle elevation-2" alt="User Image">
           <span class="d-none d-md-inline">{{Session::get('ID_User')}}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-green">
-            <img src="{{asset('/lte3/dist/img/default.png') }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{asset('foto_pengajar/' . $fotoprofil->Foto) }}" class="img-circle elevation-2" alt="User Image">
 
             <p>
               {{Session::get('ID_User')}}
