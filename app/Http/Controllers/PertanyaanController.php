@@ -126,12 +126,16 @@ class PertanyaanController extends Controller
     {
 
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first(); 
             // mengambil data dari table books
     $pertanyaan = DB::table('pertanyaans')
                     ->where('ID_Penjawab',$getuser)     
                     -> get();
     // mengirim data books ke view books
-    return view('pengajar/indexpertanyaan', ['pertanyaan' => $pertanyaan]);
+    return view('pengajar/indexpertanyaan', ['pertanyaan' => $pertanyaan], compact('fotoprofil'));
     }
 
     public function jawabpertanyaan(Request $request,$ID)

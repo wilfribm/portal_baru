@@ -32,15 +32,10 @@ class slideController extends Controller
         $id_slide = $request->input('id');
 
         if ($request->hasFile('foto')) {
-            // Get File Name w/ Ext
             $filenameWithExt = $request->file('foto')->getClientOriginalName();
-            // Get Just File Name
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get Just Ext
             $extension = $request->file('foto')->getClientOriginalExtension();
-            // File Name To Store
             $fileNameToStore = $id_slide.'_'.$filename.'_'.time().'.'.$extension;
-            // Upload Image
             $store_location = 'foto_slide';
             $file = $request->file('foto');
             $file->move($store_location, $fileNameToStore);
@@ -74,54 +69,20 @@ class slideController extends Controller
     
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'judul' => 'required',
-            'keterangan' => 'required',
-            'foto' => 'required'
-        ]);
+        $judul =$request->input('judul');
+        $keterangan = $request->input('keterangan');
 
-        if ($request->hasFile('foto')) {
-            $foto = DB::table('master_slideshow')
-                ->where('id', $id)
-                ->first();
-
-            if (!empty($foto)) {
-                $image_path = public_path().'/foto_slide'.'/'.$foto->foto;
-                if (file_exists($image_path)) {
-                    unlink($image_path);
-                }
-            }
-            
-            // Get File Name w/ Ext
-            $filenameWithExt = $request->file('foto')->getClientOriginalName();
-            // Get Just File Name
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get Just Ext
-            $extension = $request->file('foto')->getClientOriginalExtension();
-            // File Name To Store
-            $fileNameToStore = $id.'_'.$filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $store_location = 'foto_slide';
-            $file = $request->file('foto');
-            $file->move($store_location, $fileNameToStore);
+        $foto  = $request->file('foto');
+        if(!empty($foto))
+        {
+            $namaFoto   = $foto->getClientOriginalName();
+            $foto->move(\base_path() ."/public/foto_slide", $namaFoto);
+            $update = array('judul'=>$judul, 'keterangan'=>$keterangan, 'foto'=>$namaFoto);
+            DB::table('master_slideshow')->where('id', $id)->update($update);
+        }else{
+            $update = array('judul'=>$judul, 'keterangan'=>$keterangan);
+            DB::table('master_slideshow')->where('id', $id)->update($update);
         }
-        
-        $foto = DB::table('master_slideshow')
-                ->where('id', $id)
-                ->first();
-        
-        if (!empty($foto)) {
-            if ($request->hasFile('foto')) {
-                DB::table('master_slideshow')
-                ->where('id', $id)
-                ->update([
-                    'judul' => $request->judul,
-                    'keterangan' => $request->keterangan,
-                    'foto' => $fileNameToStore
-                ]);
-            }
-        }
-        
         return redirect('/admin/slide')->with('success', 'Slideshow berhasil di Edit');
     }
 

@@ -110,6 +110,13 @@ Route::get('/pengajar/indextopik/destroy/{id}', 'TopikController@destroy');
 //  Route::get('../materipengajar/{{$materi->dokumen}}');
 Route::get('materi_public/{ID}','DasboardController@MateriPublic');
 Route::get('pengajar/profile','ProfileController@Profile');
+Route::get('/pengajar/ubahprofil/{id}','ProfileController@ubahprofil');
+Route::post('/pengajar/updateprofile/{id}','ProfileController@update_profile');
+
+// Route::get('/updateprofile/ambilProvinsi/{id}','ProfileController@ubahprofil');
+Route::post('/pengajar/ubahprofil/ambilKabupaten/','ProfileController@ambilKabupaten');
+Route::post('ambilKecamatan/','ProfileController@ambilKecamatan');
+//Route::post('/pengajar/ubahprofil/ambilKelurahan/','ProfileController@ambilKelurahan');
 // Route::get('pengajar/indexpertanyaan', function () {
 //     return view('pengajar/indexpertanyaan');
 //  });
@@ -117,6 +124,7 @@ Route::get('pengajar/indexpertanyaan','PertanyaanController@pengajarlihatpertany
 Route::get('pengajar/indexpertanyaan/menjawab/{ID}','PertanyaanController@jawabpertanyaan');
 Route::post('/pengajar/indexpertanyaan/simpan','PertanyaanController@simpan');
 Route::get('/pengajar/peserta','DasboardController@lihatpeserta');
+
 
 
 //DARI SI PETANI ADMIN

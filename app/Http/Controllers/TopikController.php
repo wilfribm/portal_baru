@@ -64,8 +64,12 @@ class TopikController extends Controller
                     ->join('master_kategori', 'master_kategori.ID_Kategori', '=', 'master_topik.ID_Kategori')
                     ->where('ID_User',$getuser)     
                     -> get();
+    $fotoprofil = DB::table('master_detail_user')
+                    ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                    ->where('master_detail_user.ID_User',$getuser)
+                    ->first(); 
     // mengirim data books ke view books
-    return view('pengajar/indextopik', ['showtopik' => $showtopik]);
+    return view('pengajar/indextopik', compact('fotoprofil'), ['showtopik' => $showtopik]);
     }
 
     public function destroy($ID_Topik) 
@@ -75,12 +79,17 @@ class TopikController extends Controller
     // Alihkan ke halaman books
     return redirect('pengajar/indextopik') -> with('status', 'Data Buku Berhasil DiHapus');
 }
-public function edit($ID_Topik){
+public function edit(Request $request,$ID_Topik){
     // mengambil data books berdasarkan id yang dipilih
     $topik = DB::table('master_topik')->where('ID_Topik',$ID_Topik)->first();
+    $getuser = $request->session()->get('ID_User');
+    $fotoprofil = DB::table('master_detail_user')
+                    ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                    ->where('master_detail_user.ID_User',$getuser)
+                    ->first(); 
     // passing data books yang didapat ke view edit.blade.php
     // dd($topik);
-    return view('pengajar/edittopik', compact('topik'));
+    return view('pengajar/edittopik', compact('topik','fotoprofil'));
     }
 
     public function update(Request $request) 
@@ -102,13 +111,21 @@ public function edit($ID_Topik){
         // );
         //     DB::table('master_topik')-> where('ID_Topik', $request -> ID_Topik)->update($data_input);
         // return redirect('pengajar/indextopik')-> with('status', 'Data Berhasil DiUbah');
+
         $nama = $request->session()->get('ID_User');
-  
         // menyimpan data file yang diupload ke variabel $file* 
         $file = $request->file('foto');
         $tujuan_upload = 'fototopik';
         if(empty ($file)){
-            return redirect('pengajar/indextopik')->with('alert','Update Materi Gagal Harap Masukan Update Foto Topik');
+            $upload_topik = array(
+            // 'ID_Topik' => $request->input('ID_Topik'),
+            'ID_Kategori'=> $request->input('ID_Kategori'),
+            'topik' => $request->input('Topik'),
+            'ID_User'=>$nama,
+        );
+            DB::table('master_topik')->  where('ID_Topik', $request -> ID_Topik)->update($upload_topik);
+            return redirect('pengajar/indextopik')-> with('status', 'Data  Berhasil Di Edit');
+            //return redirect('pengajar/indextopik')->with('alert','Update Materi Gagal Harap Masukan Update Foto Topik');
         }else{  
         $file_name=$file->getClientOriginalName(); 
         $file->move($tujuan_upload,$file_name);
@@ -121,7 +138,7 @@ public function edit($ID_Topik){
             'input_img' =>$file_name
         );
             DB::table('master_topik')->  where('ID_Topik', $request -> ID_Topik)->update($upload_topik);
-        return redirect('pengajar/indextopik')-> with('status', 'Data  Berhasil DiTambah');
+        return redirect('pengajar/indextopik')-> with('status', 'Data  Berhasil Di Edit');
     }
         // $value = $request->session()->get('ID_User');
         

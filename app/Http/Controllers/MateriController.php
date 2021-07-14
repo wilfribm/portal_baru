@@ -14,12 +14,16 @@ class MateriController extends Controller
     {
 
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                    ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                    ->where('master_detail_user.ID_User',$getuser)
+                    ->first(); 
             // mengambil data dari table books
     $materi = DB::table('master_topik')
                     ->where('ID_User',$getuser)     
                     -> get();
     // mengirim data books ke view books
-    return view('pengajar/upload_materi', ['materi' => $materi]);
+    return view('pengajar/upload_materi', compact('fotoprofil'), ['materi' => $materi]);
     }
     
     
@@ -54,6 +58,10 @@ class MateriController extends Controller
  
 
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                    ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                    ->where('master_detail_user.ID_User',$getuser)
+                    ->first(); 
             // mengambil data dari table books
             
     $showmateri = DB::table('master_upload_materi')
@@ -61,11 +69,16 @@ class MateriController extends Controller
                     ->where('master_upload_materi.ID_User',$getuser)     
                     -> get();
     // mengirim data books ke view books
-    return view('pengajar/indexmateri', ['showmateri' => $showmateri]);
+    return view('pengajar/indexmateri', compact('fotoprofil'),['showmateri' => $showmateri]);
 
 
     }
-    public function edit($ID){
+    public function edit(Request $request,$ID){
+        $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                    ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                    ->where('master_detail_user.ID_User',$getuser)
+                    ->first(); 
         // mengambil data books berdasarkan id yang dipilih
         $materi = DB::table('master_upload_materi')
         ->join('master_topik', 'master_topik.ID_Topik', '=', 'master_upload_materi.ID_Topik')
@@ -73,7 +86,7 @@ class MateriController extends Controller
         ->first();
         // dd($materi);
         // passing data books yang didapat ke view edit.blade.php
-        return view('pengajar/editmateri', compact('materi'));
+        return view('pengajar/editmateri', compact('materi','fotoprofil'));
         }
         
         public function update(Request $request) 
@@ -85,7 +98,19 @@ class MateriController extends Controller
     $tujuan_upload = 'materipengajar';
     
     if(empty ($file)){
-        return redirect('pengajar/indexmateri')->with('alert','Update Materi Gagal Harap Masukan Update File PDF');
+        $update = array(
+
+        'ID_Topik'=> $request->input('id_topik'),
+        'nama_materi' => $nama_materi,
+        'deskripsi' => $request->input('deskripsi'),
+        'link_video' => $request->input('link_video'),
+        'edit_at' => $ldate = date('Y-m-d H:i:s')
+    );
+        DB::table('master_upload_materi')-> where('ID', $request -> ID) -> update(
+        $update
+        );
+        return redirect('pengajar/indexmateri') -> with('status', 'Data Berhasil DiUbah');
+        //return redirect('pengajar/indexmateri')->with('alert','Update Materi Gagal Harap Masukan Update File PDF');
     }else{
         
     $file->move($tujuan_upload,$request->input('nama_materi'). '-' .$nama. '-' . date("Y-m-d") .'.pdf');

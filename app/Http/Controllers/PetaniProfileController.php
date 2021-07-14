@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Validator;
+
 
 
 
@@ -166,20 +168,25 @@ class PetaniProfileController extends Controller
        //  $jml_lahan = $request->input('jml_lahan');
 
             
-            $resorce  = $request->file('Foto');
+            //$resorce  = $request->file('Foto');
             // $name   = $resorce->getClientOriginalName();
             // $resorce->move(\base_path() ."/public/foto_petani", $name);
             
 
-          if(!empty($resorce)){
-            $name   = $resorce->getClientOriginalName();
-            $resorce->move(\base_path() ."/public/foto_petani", $name);
-                $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Provinsi'=>$Provinsi, 'Kabupaten'=>$Kabupaten,'Kecamatan'=>$Kecamatan,'Desa_Kelurahan'=>$Kelurahan_desa, 'Foto'=>$name);
+          if($request->hasFile('Foto')) {
+            $Foto  = $request->file('Foto');
+            $nama_Foto   = $Foto->getClientOriginalName();
+            $Resize = Image::make($Foto->getRealPath());
+            $Resize->resize(140, 170);
+            $Resize->save(public_path('/foto_petani/' .$nama_Foto));
+
+            //$name   = $resorce->getClientOriginalName();
+            //$resorce->move(\base_path() ."/public/foto_petani", $name);
+                $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Provinsi'=>$Provinsi, 'Kabupaten'=>$Kabupaten,'Kecamatan'=>$Kecamatan,'Desa_Kelurahan'=>$Kelurahan_desa, 'Foto'=>$nama_Foto);
 
                     $detail=array('nama'=>$Nama_Petani,
-                    'tanggal_lahir'=>$Tanggal_Lahir,'alamat'=>$Alamat_Petani,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email, 'jenis_kelamin'=>$Jenis_Kelamin,'provinsi'=>$Provinsi, 'kabupaten'=>$Kabupaten,'kecamatan'=>$Kecamatan,'kelurahan_desa'=>$Kelurahan_desa, 'Foto'=>$name);
+                    'tanggal_lahir'=>$Tanggal_Lahir,'alamat'=>$Alamat_Petani,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email, 'jenis_kelamin'=>$Jenis_Kelamin,'provinsi'=>$Provinsi, 'kabupaten'=>$Kabupaten,'kecamatan'=>$Kecamatan,'kelurahan_desa'=>$Kelurahan_desa, 'Foto'=>$nama_Foto);
 
-                  
                     DB::table('master_petani')->where('ID_User', $id)->update($maspet);
                     DB::table('master_detail_user')->where('ID_User', $id)->update($detail);
                 
@@ -195,14 +202,8 @@ class PetaniProfileController extends Controller
                     DB::table('master_petani')->where('ID_User', $id)->update($maspet);
                     DB::table('master_detail_user')->where('ID_User', $id)->update($detail);
           }
-                    
-           
-             
-
-         
-
-        
-        return back()->with('success', 'Ubah Petani Berhasil');
+       return redirect()->to('data/diri/'.$id)->with('success', 'Ubah Petani Berhasil');
+        //return back()->with('success', 'Ubah Petani Berhasil');
 
     }
 
@@ -225,19 +226,14 @@ class PetaniProfileController extends Controller
         $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
 
 
+
         $kel = DB::table('master_kel_tani')
                 ->select('Nama_Kelompok_Tani')
                 ->where('ID_User', $id)
                 ->first();
 
         // dd($kel);
-
-
         $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
-
-        
-
-        
         return view('petani.cetak_kartu_petani', compact('cetak','url','kel'));
     }
 
@@ -264,6 +260,9 @@ class PetaniProfileController extends Controller
 
         }
         return response()->json($movies);
+
+        return view('petani.cetak_kartu_petani', compact('cetak','url','kelompok'));
+
     }
 
     

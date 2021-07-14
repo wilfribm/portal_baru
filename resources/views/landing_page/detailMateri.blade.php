@@ -12,7 +12,14 @@
                             <div class="d-flex justify-content-start">
                                 <div class="userData ml-3">
                                     <h2 class="d-block">{{$data->nama_materi}}</h2>
-                                    <label style="font-weight:bold;">Oleh: {{$data->nama}} | {{$data->create_at}}</label>
+                                    <label style="font-weight:bold;">Oleh: {{$data->nama}} | {{$data->create_at}} | </label>
+                                    <label style="font-weight:bold;">
+                                    @foreach ($materi as $m)
+                                        @if( file_exists( public_path('/materipengajar/' . $m->dokumen) ))
+                                        <a href="./../../materipengajar/{{$m->dokumen}}"><i class="far fa-file-pdf"></i> Download Materi</a>
+                                        @endif
+                                    @endforeach
+                                    </label>
                                 </div>
                             </div>
 
@@ -26,6 +33,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            
                                             <div class="col-md-8">
                                                 <h4>Deskripsi</h4>{!!$data->deskripsi!!}
                                             </div>

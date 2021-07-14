@@ -13,6 +13,10 @@ class DasboardController extends Controller
     public function index(Request $request)
     {
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first();
             // mengambil data dari table books
     $indexing = DB::table('master_topik')
                     ->join('master_kategori', 'master_kategori.ID_Kategori', '=', 'master_topik.ID_Kategori') 
@@ -20,32 +24,44 @@ class DasboardController extends Controller
                     ->groupBy('master_topik.ID_Kategori')  
                     -> get();
     // mengirim data books ke view books
-    return view('pengajar/dashboard', ['indexing' => $indexing]);
+    return view('pengajar/dashboard', compact ('fotoprofil'), ['indexing' => $indexing]);
     }
     public function edit(Request $request,$indexing){
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first();
         // mengambil data books berdasarkan id yang dipilih
         $topik = DB::table('master_topik')->where('ID_User',$getuser)
                                             
                                             ->where('ID_Kategori',$indexing)
                                             ->get();
         // passing data books yang didapat ke view edit.blade.php
-        return view('pengajar/topik', compact('topik'));
+        return view('pengajar/topik', compact('topik','fotoprofil'));
 }
 
     public function showMateri(Request $request,$topik){
         $getuser = $request->session()->get('ID_User');
+        $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first();
         // mengambil data books berdasarkan id yang dipilih
         $materi = DB::table('master_upload_materi')->where('master_upload_materi.ID_User',$getuser)
                                             ->join('master_topik', 'master_topik.ID_Topik', '=', 'master_upload_materi.ID_Topik')
                                             ->where('master_upload_materi.ID_Topik',$topik)
                                             ->get();
         // passing data books yang didapat ke view edit.blade.php
-        return view('pengajar/materi', compact('materi'));
+        return view('pengajar/materi', compact('materi','fotoprofil'));
     }
     public function DetailMateri(Request $request,$ID)
         {
             $getuser = $request->session()->get('ID_User');
+            $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first();
             // mengambil data books berdasarkan id yang dipilih
         // mengambil data books berdasarkan id yang dipilih
         $materi = DB::table('master_upload_materi')
@@ -54,7 +70,7 @@ class DasboardController extends Controller
                         ->where('master_upload_materi.ID',$ID)
                         ->first();
         // passing data books yang didapat ke view edit.blade.php
-        return view('pengajar/DetailMateri', compact('materi'));
+        return view('pengajar/DetailMateri', compact('materi','fotoprofil'));
         }
         public function MateriPublic($ID){
             $materipublic = DB::table('master_upload_materi')->where('ID',$ID)->first();
@@ -64,13 +80,17 @@ class DasboardController extends Controller
 
         public function lihatpeserta(Request $request){
             $getuser = $request->session()->get('ID_User');
+            $fotoprofil = DB::table('master_detail_user')
+                                ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+                                ->where('master_detail_user.ID_User',$getuser)
+                                ->first();
             $getdatapeserta = DB::table('history')
                                 ->select('ID_User',DB::raw('count(*) as total'),'nama_materi')
                                 ->where('ID_Pengajar',$getuser)
                                 ->groupBy('ID_Materi')
                                 ->get();     
                                 // dd($getdatapeserta);             
-                    return view('pengajar/peserta', ['getdatapeserta' => $getdatapeserta]);
+                    return view('pengajar/peserta', ['getdatapeserta' => $getdatapeserta], compact('fotoprofil'));
         }   
 
         
