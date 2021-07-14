@@ -103,30 +103,30 @@ class PetaniController extends Controller
     }
     public function daftar_petani()
     {
-    	return view('admin.data_petani.daftar_petani');
+        return view('admin.data_petani.daftar_petani');
     } 
 
     public function daftar_petani_semua(Request $request)
     {
-    	
-    	$pagination = 10;
-    	$cari = $request->cari;
-    	// $daftar = DB::TABLE('master_petani')->paginate($pagination);
-    	$daftar = DB::TABLE('master_petani')->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
+        
+        $pagination = 10;
+        $cari = $request->cari;
+        // $daftar = DB::TABLE('master_petani')->paginate($pagination);
+        $daftar = DB::TABLE('master_petani')->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
 
 
-	// 	$cari_petani = DB::table('master_petani')
-	// ->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
+    //  $cari_petani = DB::table('master_petani')
+    // ->where('Nama_Petani','like',"%".$cari."%")->paginate($pagination);
 
 
-    	// var_dump($daftar);
-    	return view('admin.data_petani.daftar_petani_semua', compact('daftar'))->with('i', ($request->input('page', 1) - 1) * $pagination);
+        // var_dump($daftar);
+        return view('admin.data_petani.daftar_petani_semua', compact('daftar'))->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
 
     public function detail_petani($id)
     {
-    	$detail_petani = DB::table('master_petani')->where('ID_User',$id)->first();
-    	return view('admin.data_petani.detail_petani', compact('detail_petani'));
+        $detail_petani = DB::table('master_petani')->where('ID_User',$id)->first();
+        return view('admin.data_petani.detail_petani', compact('detail_petani'));
        
     } 
 
@@ -134,25 +134,25 @@ class PetaniController extends Controller
 
     public function ubah_petani($id)
     {
-    	$kabupaten = DB::SELECT('SELECT * from kabupaten ORDER BY Nama_Kabupaten ASC');
-    	// var_dump($kabupaten);
-    	$provinsi = DB::SELECT("SELECT DISTINCT  Nama_Provinsi FROM kabupaten ORDER BY Nama_Provinsi ASC");
-    	$kecamatan = DB::SELECT('SELECT * from kecamatan ORDER BY Nama_Kecamatan ASC');
-    	$kelurahan_desa = DB::SELECT('SELECT DISTINCT Nama_Desa, Nama_Kecamatan, Nama_Kabupaten, Nama_Provinsi FROM kelurahan_desa  ORDER BY Nama_Desa, Nama_Kecamatan, Nama_Kabupaten, Nama_Provinsi ASC');
+        $kabupaten = DB::SELECT('SELECT * from kabupaten ORDER BY Nama_Kabupaten ASC');
+        // var_dump($kabupaten);
+        $provinsi = DB::SELECT("SELECT DISTINCT  Nama_Provinsi FROM kabupaten ORDER BY Nama_Provinsi ASC");
+        $kecamatan = DB::SELECT('SELECT * from kecamatan ORDER BY Nama_Kecamatan ASC');
+        $kelurahan_desa = DB::SELECT('SELECT DISTINCT Nama_Desa, Nama_Kecamatan, Nama_Kabupaten, Nama_Provinsi FROM kelurahan_desa  ORDER BY Nama_Desa, Nama_Kecamatan, Nama_Kabupaten, Nama_Provinsi ASC');
 
-    	$ubah_petani = DB::table('master_petani')->where('ID_User',$id)->first();
-    	// var_dump($ubah_petani);
-    	return view('admin.data_petani.ubah_petani', compact('ubah_petani','kabupaten','provinsi','kecamatan','kelurahan_desa'));
+        $ubah_petani = DB::table('master_petani')->where('ID_User',$id)->first();
+        // var_dump($ubah_petani);
+        return view('admin.data_petani.ubah_petani', compact('ubah_petani','kabupaten','provinsi','kecamatan','kelurahan_desa'));
     }
 
     // public function ubah_petani_aksi(Request $request, $id)
     // {
-    // 	if($request->hasFile('Foto')){
+    //  if($request->hasFile('Foto')){
     //         $resorce  = $request->file('Foto');
     //         $name   = $resorce->getClientOriginalName();
     //         $resorce->move(\base_path() ."/public/foto_petani", $name);
 
-    // 		$update = DB::table('master_petani')
+    //      $update = DB::table('master_petani')
     //           ->where('ID_User', $id)
     //           ->update(['Nama_Petani' => $request->Nama_Petani,
     //                     'Alamat_Petani' => $request->Alamat_Petani,
@@ -179,21 +179,21 @@ class PetaniController extends Controller
     //                     // 'Provinsi' => $request->Nama_Provinsi,
     //                     'Foto' => $name
     //                     ]);
-    // 	// var_dump($ubah_petani);
+    //  // var_dump($ubah_petani);
     //           if($update){
-    //           	return redirect('admin/daftar/petani/semua')->with('success', 'Ubah Data Berhasil');
+    //              return redirect('admin/daftar/petani/semua')->with('success', 'Ubah Data Berhasil');
     //           }else{
-    //           	"Gagal";
+    //              "Gagal";
     //           }
         
-    // 	}else{
-    // 		echo "Error";
-    // 	}
+    //  }else{
+    //      echo "Error";
+    //  }
     // }
 
     public function ubah_petani_aksi(Request $request, $id)
     {
-    	$Nama_Petani = $request->input('Nama_Petani');
+        $Nama_Petani = $request->input('Nama_Petani');
         $Alamat_Petani = $request->input('Alamat_Petani');
         $Email = $request->input('Email');
         $Nomor_Telpon = $request->input('Nomor_Telpon');
@@ -231,12 +231,12 @@ class PetaniController extends Controller
         }
         return redirect('admin/daftar/petani/semua')->with('success', 'Ubah Petani Berhasil');
 
-    	// if($request->hasFile('Foto')){
+        // if($request->hasFile('Foto')){
      //        $resorce  = $request->file('Foto');
      //        $name   = $resorce->getClientOriginalName();
      //        $resorce->move(\base_path() ."/public/foto_petani", $name);
 
-    	// 	$update = DB::table('master_petani')
+        //  $update = DB::table('master_petani')
      //          ->where('ID_User', $id)
      //          ->update(['Nama_Petani' => $request->Nama_Petani,
      //                    'Alamat_Petani' => $request->Alamat_Petani,
@@ -274,14 +274,14 @@ class PetaniController extends Controller
      //                    'Foto' => $name
      //                    ]);
 
-    	
+        
              
      //         return redirect('admin/daftar/petani/semua')->with('success', 'Ubah Data Berhasil');
               
         
-    	// }else{
-    	// 	echo "Error";
-    	// }
+        // }else{
+        //  echo "Error";
+        // }
     }
 
 
@@ -335,7 +335,7 @@ class PetaniController extends Controller
 
     public function hapus($id)
     {
-    	DB::table('master_user')
+        DB::table('master_user')
             ->where('ID_User', $id)
             ->delete();
 
@@ -356,23 +356,23 @@ class PetaniController extends Controller
 
 
  //    public function cari(Request $request)
-	// {
-	// 	// menangkap data pencarian
-	// 	$cari = $request->cari;
+    // {
+    //  // menangkap data pencarian
+    //  $cari = $request->cari;
  
- //    		// mengambil data dari table petani sesuai pencarian data
-	// 	$daftar = DB::table('master_petani')
-	// 	->where('Nama_Petani','like',"%".$cari."%")
-	// 	->paginate();
+ //         // mengambil data dari table petani sesuai pencarian data
+    //  $daftar = DB::table('master_petani')
+    //  ->where('Nama_Petani','like',"%".$cari."%")
+    //  ->paginate();
  
- //    		// mengirim data petani ke view petani
-	// 	return view('admin.data_petani.daftar_petani_semua', compact('daftar'));
+ //         // mengirim data petani ke view petani
+    //  return view('admin.data_petani.daftar_petani_semua', compact('daftar'));
  
-	// }
+    // }
 
-	public function cetak($id)
-	{
-		$cetak = DB::table('master_petani')->where('ID_User',$id)->first();
+    public function cetak($id)
+    {
+        $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
         // $url = "www.google.com/$cetak->ID_User";
         $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
         $img = 'public/foto_petani/dutataniid-teks.png';
@@ -387,22 +387,22 @@ class PetaniController extends Controller
                 ->where('ID_User', $id)
                 ->first();
 
-		return view('admin.data_petani.cetak_kartu', compact('cetak','url','img','for','h','kel'));
-	}
+        return view('admin.data_petani.cetak_kartu', compact('cetak','url','img','for','h','kel'));
+    }
 
-	public function dashboard_petani()
-	{
-		
-		return view('petani.dashboard_petani');
-	}
+    public function dashboard_petani()
+    {
+        
+        return view('petani.dashboard_petani');
+    }
 
-	
+    
 
-	public function data_diri_petani()
-	{
-		$data = DB::table('master_petani')->where('ID_User',$id)->first();
-		return view('petani.data_diri', compact('data'));
-	}
+    public function data_diri_petani()
+    {
+        $data = DB::table('master_petani')->where('ID_User',$id)->first();
+        return view('petani.data_diri', compact('data'));
+    }
 
      
 }
