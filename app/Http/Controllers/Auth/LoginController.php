@@ -89,8 +89,16 @@ class LoginController extends Controller
             } else{
                 $u = $request->input('ID_User');
                 $p = $request->input('Password');
-                $sqlLogin = DB::SELECT("SELECT * FROM master_user WHERE ID_User= '$u' AND password='$p'");
+
                 
+
+                $sqlLogin = DB::SELECT("SELECT * FROM master_user WHERE ID_User= '$u' AND password='$p'");
+
+                
+
+
+
+
                 if($sqlLogin > 0){
 
                 return redirect('/login')->with('error','Password atau User, Salah !');

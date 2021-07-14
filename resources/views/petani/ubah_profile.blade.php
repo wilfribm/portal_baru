@@ -66,7 +66,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nama Lengkap</label>
-                              <input class="form-control" type="text" name="nama" placeholder="Nama Lengkap" value="{{$ambil->nama}}">
+                              <input class="form-control" type="text" name="nama" placeholder="Nama Lengkap" value="{{$ambil->nama}}" onchange="return validasiNama()">
                             </div>
                           </div>
                           <div class="col">
@@ -98,7 +98,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nomor Telpon</label>
-                              <input class="form-control" type="text" name="nomor_telpon" placeholder="Nomor Telpon" value="{{$ambil->nomor_telpon}}">
+                              <input class="form-control" type="text" name="nomor_telpon" placeholder="Nomor Telpon" value="{{$ambil->nomor_telpon}}" onchange="return validasiNo()">
                             </div>
                           </div>
                           <div class="col">
@@ -158,6 +158,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Kabupaten</label>
+                              
                               <select class="form-control" name="kabupaten">
                                 <?php 
 
@@ -170,6 +171,8 @@
                                  @endforeach
                                  
                               </select>
+                              <!-- <select class="livesearch form-control" name="livesearch"></select> -->
+
                             </div>
                           </div>
                         </div>
@@ -229,6 +232,11 @@
                       </div>
                     </div>
                   </form>
+
+
+                  
+
+
                   
                   <script type="text/javascript">
                     function validasiEkstensi(){
@@ -252,6 +260,59 @@
 }
                   </script>
 
+                
+
+                  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+  $('.cari').select2({
+    placeholder: 'Cari...',
+    ajax: {
+      url: '/cari',
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.Nama_Kabupaten,
+              
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+</script>
+ -->
+
+ <link href="http://demo.expertphp.in/css/jquery.ui.autocomplete.css" rel="stylesheet">
+<script src="http://demo.expertphp.in/js/jquery.js"></script>
+<script src="http://demo.expertphp.in/js/jquery-ui.min.js"></script>
+ <script>
+   $(document).ready(function() {
+    src = "{{ route('searchajax') }}";
+     $("#search_text").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);
+                   
+                }
+            });
+        },
+        minLength: 3,
+       
+    });
+});
+</script>
                  
 
                 </div>

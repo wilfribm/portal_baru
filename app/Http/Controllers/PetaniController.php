@@ -8,6 +8,26 @@ use Illuminate\Support\Facades\DB;
 
 class PetaniController extends Controller
 {
+
+    public function autoComplete(Request $request) {
+        $query = $request->get('term','');
+
+        $products = DB::table('kabupaten')
+                ->where('Nama_Kabupaten', 'LIKE', '%$query%')
+                ->get();
+
+        // $products=DB::table('name','LIKE','%'.$query.'%')->get();
+        
+        $data=array();
+        foreach ($products as $product) {
+                $data[]=array('value'=>$product->Nama_Kabupaten);
+        }
+        if(count($data))
+             return $data;
+        else
+            return ['value'=>'No Result Found','id'=>''];
+    }
+
     public function reset_password(Request $request, $id)
     {
         $id = $request->route('id');
@@ -182,7 +202,7 @@ class PetaniController extends Controller
         $Agama = $request->input('Agama');
         $Tanggal_Lahir = $request->input('Tanggal_Lahir');
         $Deskripsi_Keahlian = $request->input('Deskripsi_Keahlian');
-       $Status = $request->input('Status');
+        $Status = $request->input('Status');
 
         $nama_istri = $request->input('nama_istri');
         $jml_tng_kerja_musiman = $request->input('jml_tng_kerja_musiman');
@@ -359,7 +379,15 @@ class PetaniController extends Controller
         // var_dump($url);
         $for = 'png';
         $h = 'H';
-		return view('admin.data_petani.cetak_kartu', compact('cetak','url','img','for','h'));
+
+
+
+        $kel = DB::table('master_kel_tani')
+                ->select('Nama_Kelompok_Tani')
+                ->where('ID_User', $id)
+                ->first();
+
+		return view('admin.data_petani.cetak_kartu', compact('cetak','url','img','for','h','kel'));
 	}
 
 	public function dashboard_petani()

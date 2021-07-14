@@ -22,6 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user','Auth\RegisCobaController@create');
 Route::post('/user/create','Auth\RegisCobaController@store');
 
+Route::get('/cari', 'PetaniProfileController@loadData');
+
+Route::get('searchajax',array('as'=>'searchajax','uses'=>'PetaniController@autoComplete'));
+
+
+Route::get('/ajax-autocomplete-search', [PetaniProfileController::class, 'selectSearch']);
+
 
 Route::get('/', function () {
     return view('landing_page/index');
