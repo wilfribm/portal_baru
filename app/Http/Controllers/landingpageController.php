@@ -91,7 +91,13 @@ class landingpageController extends Controller
             })
             ->where('ID',$id)
             ->get();
-        return view('landing_page.detailMateri', compact('detailMateri'));
+        $materi = DB::table('master_upload_materi')
+            ->join('master_topik', function($join){
+             $join->on('master_topik.ID_Topik', '=', 'master_upload_materi.ID_Topik');
+            })
+            ->where('ID',$id)
+            ->get();
+        return view('landing_page.detailMateri', compact('detailMateri','materi'));
     }
 
 }
