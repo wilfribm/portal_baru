@@ -78,7 +78,7 @@ class LoginController extends Controller
                     return redirect('/admin/approval');
 
                 }elseif($role->ID_Kategori == 'PET'){
-                    return view('petani/dashboard_petani');
+                    return redirect('/petani/dashboard_petani');
                 }else {
                     if ($validasi->Tingkat_Priv == 1) {
                         return redirect('pengajar/dashboard');
@@ -89,16 +89,8 @@ class LoginController extends Controller
             } else{
                 $u = $request->input('ID_User');
                 $p = $request->input('Password');
-
-                
-
                 $sqlLogin = DB::SELECT("SELECT * FROM master_user WHERE ID_User= '$u' AND password='$p'");
-
                 
-
-
-
-
                 if($sqlLogin > 0){
 
                 return redirect('/login')->with('error','Password atau User, Salah !');

@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use Carbon;
 
 
 
@@ -80,6 +81,11 @@ class PetaniProfileController extends Controller
         Validator::extend('without_spaces', function($attr, $value){
         return preg_match('/^\S*$/u', $value);
     });
+
+
+        
+        $dt = new Carbon\Carbon();
+        $before = $dt->subYears(13)->format('Y-m-d');
       $this->validate($request, [
          // $request->validate([
             // $id = 'ID_User' => 'required|min:3|max:10|without_spaces',
@@ -92,11 +98,14 @@ class PetaniProfileController extends Controller
             $nt = 'nomor_telpon'=>'required|regex:/^[0-9]+$/|min:10|max:12',
 
             $jk = 'jenis_kelamin'=>'required|regex:/^[1-2]+$/',
+            
 
             $pv = 'provinsi' => 'required|regex:/^[a-zA-Z ]*$/',
             $kb = 'kabupaten' => 'required|regex:/^[a-zA-Z ]*$/',
             $kc = 'kecamatan' => 'required|regex:/^[a-zA-Z ]*$/',
             $kd = 'kelurahan_desa' => 'required|regex:/^[a-zA-Z ]*$/',
+
+            $tgl= 'tanggal_lahir' => 'required|date|before:' . $before,
 
             
             
@@ -123,6 +132,10 @@ class PetaniProfileController extends Controller
             'nama.min' => 'Nama yang diubah Tidak Valid',
 
             'jenis_kelamin.regex' => 'Jenis Kelamin Belum dipilih',
+
+            'tanggal_lahir.before' => 'Tanggal lahir Tidak Valid, setidaknya anda lahir 13 tahun lalu',
+
+             
 
             'provinsi.regex' => 'Provinsi Belum dipilih',
             'kabupaten.regex' => 'Kabupaten Belum dipilih',
@@ -270,3 +283,275 @@ class PetaniProfileController extends Controller
 
     
 }
+
+
+// namespace App\Http\Controllers;
+
+// use DB;
+// use Illuminate\Http\Request;
+// use App\Http\Controllers\Controller;
+// use Validator;
+
+
+
+
+// class PetaniProfileController extends Controller
+// {
+//     // public function data_diri_petani(Request $request){
+//     //     $getuser = $request->session()->get('ID_User');
+//     //     $showprofile = DB::table('master_detail_user')
+//     //                             ->join('master_user_kat', 'master_user_kat.ID_User', '=', 'master_detail_user.ID_User')
+//     //                             ->where('master_detail_user.ID_User',$getuser)
+//     //                             ->first();
+
+
+//     //     // $showprofile = DB::table('SELECT * FROM master_petani');
+                                
+//     //     // var_dump($showprofile);
+//     //     return view('petani.data_diri', compact('showprofile'));
+//     // }
+
+//     public function data_diri_petani(Request $request, $id)
+//     {
+       
+//         $id = $request->route('id');
+//         // $data = DB::SELECT("SELECT * FROM master_detail_user WHERE ID_User = '$id_user'");
+//        $detail = DB::table('master_detail_user')
+//                 ->where('ID_User', $id)
+//                 ->first();
+//         $lahan = DB::table('master_petani')
+//                 ->where('ID_User', $id)
+//                 ->first();
+        
+//         // var_dump($detail);
+//          return view('petani.data_diri', compact('detail','lahan'));
+//     }
+
+    
+
+//     public function ubah_profile(Request $request, $id)
+//     {
+//         $id = $request->route('id');
+//         $ambil = DB::table('master_detail_user')
+//                 ->where('ID_User', $id)
+//                 ->first();
+
+        
+
+        
+//         $kab = DB::SELECT("SELECT * FROM kabupaten WHERE Nama_Provinsi='ACEH'");
+        
+//         return view('petani.ubah_profile', compact('ambil'));
+
+//     }
+
+//      public function loadData(Request $request)
+//     {
+//         if ($request->has('q')) {
+//             $cari = $request->q;
+//             $data = DB::table('kabupaten')
+//                     ->select('Nama_Kabupaten')
+//                     ->where('Nama_Kabupaten', 'LIKE', '%$cari%')
+//                     ->get();
+//             // var_dump($data);
+//             return response()->json($data);
+//         }
+//     }
+
+    
+
+//     public function update_profile(Request $request, $id)
+//     {
+//         Validator::extend('without_spaces', function($attr, $value){
+//         return preg_match('/^\S*$/u', $value);
+//     });
+//       $this->validate($request, [
+//          // $request->validate([
+//             // $id = 'ID_User' => 'required|min:3|max:10|without_spaces',
+
+//             // $idk = 'ID_Kategori' => 'required|regex:/^[a-zA-Z]+$/u',
+
+//             $nm = 'nama' => 'required|regex:/^[a-zA-Z ]*$/|max:30|min:3',
+            
+            
+//             $nt = 'nomor_telpon'=>'required|regex:/^[0-9]+$/|min:10|max:12',
+
+//             $jk = 'jenis_kelamin'=>'required|regex:/^[1-2]+$/',
+
+//             $pv = 'provinsi' => 'required|regex:/^[a-zA-Z ]*$/',
+//             $kb = 'kabupaten' => 'required|regex:/^[a-zA-Z ]*$/',
+//             $kc = 'kecamatan' => 'required|regex:/^[a-zA-Z ]*$/',
+//             $kd = 'kelurahan_desa' => 'required|regex:/^[a-zA-Z ]*$/',
+
+            
+            
+
+//             // 'email' => 'required|email|unique:users',
+
+//             // $p = 'password' => 'required|min:3',                
+
+//             // $cp = 'password_confirmation' => 'required|min:3|max:20|same:password',
+
+//         ], [
+
+//             // 'ID_User.required' => 'Username Harus diisi',
+
+//             // 'ID_User.min' => 'Username Harus 3 Karakter',
+
+//             // 'ID_User.max' => 'Username Hanya Maksimal 10 Karakter',
+
+//             // 'ID_User.without_spaces' => 'Username Tidak Boleh Mengandung Spasi',
+
+//             'nama.required' => 'Nama yang diubah Harus diisi',
+//             'nama.regex' => 'Nama yang diubah Harus Mengandung Huruf',
+//             'nama.max' => 'Nama yang diubah Tidak Valid',
+//             'nama.min' => 'Nama yang diubah Tidak Valid',
+
+//             'jenis_kelamin.regex' => 'Jenis Kelamin Belum dipilih',
+
+//             'provinsi.regex' => 'Provinsi Belum dipilih',
+//             'kabupaten.regex' => 'Kabupaten Belum dipilih',
+//             'kecamatan.regex' => 'Kecamatan Belum dipilih',
+//             'kelurahan_desa.regex' => 'Kelurahan / Desa Belum dipilih',
+//             // 'ID_Kategori.regex' => 'Harap Pilih Mendaftar Sebagai Apa',
+
+//             'nomor_telpon.required' => 'Nomor yang diubah Harus diisi',
+//             'nomor_telpon.regex' => 'Nomor yang diubah Harus Angka',
+//             'nomor_telpon.min' => 'Nomor yang diubah Tidak Valid',
+//             'nomor_telpon.max' => 'Nomor yang diubah Terlalu Banyak',
+
+//             // 'password.required' => 'Password Harus Diisi',
+//             // 'password.min' => 'Password Minimal 3 Karakter',
+//             // 'password_confirmation.same' => 'Password Tidak Sama',
+
+//         ]);
+
+
+//         $id = $request->route('id');
+//         $Nama_Petani = $request->input('nama');
+//         $Jenis_Kelamin = $request->input('jenis_kelamin');
+//         $Alamat_Petani = $request->input('alamat');
+//         $Tanggal_Lahir = $request->input('tanggal_lahir');
+//         $Provinsi = $request->input('provinsi');
+//         $Kabupaten = $request->input('kabupaten');
+//         $Kecamatan = $request->input('kecamatan');
+//         $Kelurahan_desa = $request->input('kelurahan_desa');
+//         $Nomor_Telpon = $request->input('nomor_telpon');
+//         $Email = $request->input('Email');
+        
+//        //  $Pendidikan_Terakhir = $request->input('Pendidikan_Terakhir');
+//        //  $Jumlah_Tanggungan = $request->input('Jumlah_Tanggungan');
+//        //  $Agama = $request->input('Agama');
+        
+//        //  $Deskripsi_Keahlian = $request->input('Deskripsi_Keahlian');
+//        // $Status = $request->input('Status');
+
+//        //  $nama_istri = $request->input('nama_istri');
+//        //  $jml_tng_kerja_musiman = $request->input('jml_tng_kerja_musiman');
+//        //  $jml_lahan = $request->input('jml_lahan');
+
+            
+//             $resorce  = $request->file('Foto');
+//             // $name   = $resorce->getClientOriginalName();
+//             // $resorce->move(\base_path() ."/public/foto_petani", $name);
+            
+
+//           if(!empty($resorce)){
+//             $name   = $resorce->getClientOriginalName();
+//             $resorce->move(\base_path() ."/public/foto_petani", $name);
+//                 $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Provinsi'=>$Provinsi, 'Kabupaten'=>$Kabupaten,'Kecamatan'=>$Kecamatan,'Desa_Kelurahan'=>$Kelurahan_desa, 'Foto'=>$name);
+
+//                     $detail=array('nama'=>$Nama_Petani,
+//                     'tanggal_lahir'=>$Tanggal_Lahir,'alamat'=>$Alamat_Petani,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email, 'jenis_kelamin'=>$Jenis_Kelamin,'provinsi'=>$Provinsi, 'kabupaten'=>$Kabupaten,'kecamatan'=>$Kecamatan,'kelurahan_desa'=>$Kelurahan_desa, 'Foto'=>$name);
+
+                  
+//                     DB::table('master_petani')->where('ID_User', $id)->update($maspet);
+//                     DB::table('master_detail_user')->where('ID_User', $id)->update($detail);
+                
+
+//           }else{
+//              $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Provinsi'=>$Provinsi, 'Kabupaten'=>$Kabupaten,'Kecamatan'=>$Kecamatan,'Desa_Kelurahan'=>$Kelurahan_desa);
+
+//                     $detail=array('nama'=>$Nama_Petani,
+//                     'tanggal_lahir'=>$Tanggal_Lahir,'alamat'=>$Alamat_Petani,'nomor_telpon'=>$Nomor_Telpon,'Email'=>$Email, 'jenis_kelamin'=>$Jenis_Kelamin,'provinsi'=>$Provinsi, 'kabupaten'=>$Kabupaten,'kecamatan'=>$Kecamatan,'kelurahan_desa'=>$Kelurahan_desa);
+
+                
+
+//                     DB::table('master_petani')->where('ID_User', $id)->update($maspet);
+//                     DB::table('master_detail_user')->where('ID_User', $id)->update($detail);
+//           }
+                    
+           
+             
+
+         
+
+        
+//         return back()->with('success', 'Ubah Petani Berhasil');
+
+//     }
+
+//      public function lahan_petani(Request $request, $id)
+//     {
+       
+//         $id = $request->route('id');
+//         // $data = DB::SELECT("SELECT * FROM master_detail_user WHERE ID_User = '$id_user'");
+//        $lahan_petani = DB::table('master_petani')
+//                 ->where('ID_User', $id)
+//                 ->first();
+
+//         // var_dump($lahan_petani);
+//          return view('petani.lahan', compact('lahan_petani'));
+//     }
+
+//     public function cetak_petani(Request $request, $id)
+//     {
+//         $id = $request->route('id');
+//         $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
+
+
+//         $kel = DB::table('master_kel_tani')
+//                 ->select('Nama_Kelompok_Tani')
+//                 ->where('ID_User', $id)
+//                 ->first();
+
+//         // dd($kel);
+
+
+//         $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
+
+        
+
+        
+//         return view('petani.cetak_kartu_petani', compact('cetak','url','kel'));
+//     }
+
+//     public function selectSearch(Request $request)
+//     {
+//         $movies = [];
+
+//         if($request->has('q')){
+//             $search = $request->q;
+
+//             // $movies =Movie::select("id", "name")
+//             //         ->where('name', 'LIKE', "%$search%")
+//             //         ->get();
+           
+//            $movies =DB::SELECT('provinsi')
+//                     ->where('name', 'LIKE', "%$search%")
+//                     ->get();
+
+//             // $movies = $ddb::select('id','Nama_Provinsi')
+//             //     ->where('Nama_Provinsi', 'LIKE', '%$search%')
+//             //     ->get();
+
+          
+
+//         }
+//         return response()->json($movies);
+//     }
+
+    
+
+    
+// }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use DB;
 use Validator;
+use Carbon;
 
 use App\Http\Controllers\Controller;
 // use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-    
+
     /**
      * Where to redirect users after registration.
      *
@@ -208,6 +209,9 @@ class RegisterController extends Controller
      Validator::extend('without_spaces', function($attr, $value){
         return preg_match('/^\S*$/u', $value);
     });
+        $dt = new Carbon\Carbon();
+        $before = $dt->subYears(13)->format('Y-m-d');
+
       $this->validate($request, [
          // $request->validate([
             $id = 'ID_User' => 'required|min:3|max:10|without_spaces',
@@ -223,7 +227,7 @@ class RegisterController extends Controller
 
             $pv = 'provinsi' => 'required|regex:/^[a-zA-Z ]*$/',
 
-            
+            $tgl= 'tanggal_lahir' => 'required|date|before:' . $before,
             
 
             // 'email' => 'required|email|unique:users',
@@ -246,6 +250,8 @@ class RegisterController extends Controller
             'nama.regex' => 'Nama Harus Mengandung Huruf',
             'nama.max' => 'Nama Tidak Valid',
             'nama.min' => 'Nama Tidak Valid',
+
+            'tanggal_lahir.before' => 'Tanggal lahir Tidak Valid, setidaknya anda lahir 13 tahun lalu',
 
             'jenis_kelamin.regex' => 'Jenis Kelamin Belum dipilih',
 
@@ -321,7 +327,7 @@ class RegisterController extends Controller
 
         $nama = $request->input($nm);
         $jenis_kelamin = $request->input($jk);
-        $tanggal_lahir = $request->input('tanggal_lahir');
+        $tanggal_lahir = $request->input($tgl);
         
         $alamat = $request->input('alamat');
         $provinsi= $request->input($pv);

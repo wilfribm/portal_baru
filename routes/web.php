@@ -110,7 +110,7 @@ Route::get('/pengajar/indextopik/destroy/{id}', 'TopikController@destroy');
 //  Route::get('../materipengajar/{{$materi->dokumen}}');
 Route::get('materi_public/{ID}','DasboardController@MateriPublic');
 Route::get('pengajar/profile','ProfileController@Profile');
-Route::get('/pengajar/ubahprofil/{id}','ProfileController@ubahprofil');
+Route::get('/pengajar/ubahprofil/{id}','ProfileController@editprofil');
 Route::post('/pengajar/updateprofile/{id}','ProfileController@update_profile');
 
 // Route::get('/updateprofile/ambilProvinsi/{id}','ProfileController@ubahprofil');
@@ -153,7 +153,7 @@ Route::get('refresh/{id}','PetaniController@refresh_user');
 
 
 //HALAMAN PETANI
-Route::get('dashboard','PetaniController@dashboard_petani');
+Route::get('petani/dashboard_petani','PetaniController@dashboard_petani');
 
 
 Route::get('data/diri/{id}','PetaniProfileController@data_diri_petani');
