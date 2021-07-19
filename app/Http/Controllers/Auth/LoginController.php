@@ -48,7 +48,7 @@ class LoginController extends Controller
 
         $validasi = db::table('master_user')
                          ->where('ID_User', $request->input('ID_User'))
-                         ->get()->first;
+                         ->first();
         // //inijuga
         // $petani = db::table('master_user')
         //                  ->where('ID_User', $request->input('ID_User'))
@@ -68,10 +68,10 @@ class LoginController extends Controller
         //     ->where('password', '=', $password)
         //     ->count();
 
-        if($validasi){ //apakah ID_User tersebut ada atau tidak
+        if(!empty($validasi)){ //apakah ID_User tersebut ada atau tidak
             // if(Hash::check($request->input('Password'), $validasi->ID_User->Password)){
             // if(($request->input('Password'), $validasi->ID_User->Password)){
-            if(sha1($request->input('Password')) == $validasi->ID_User->Password){
+            if(sha1($request->input('Password')) == $validasi->Password){
                 $request->session()->put('login','1');
                 $request->session()->put('ID_User',$request->input('ID_User'));
                 if ($role->ID_Kategori == 'ADP') {
@@ -80,7 +80,7 @@ class LoginController extends Controller
                 }elseif($role->ID_Kategori == 'PET'){
                     return view('petani/dashboard_petani');
                 }else {
-                    if ($validasi->ID_User->Tingkat_Priv == 1) {
+                    if ($validasi->Tingkat_Priv == 1) {
                         return redirect('pengajar/dashboard');
                     } else {
                         return redirect('/login')->with('error','Akun anda belum di Approve Admin !');
