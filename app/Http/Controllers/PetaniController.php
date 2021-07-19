@@ -212,9 +212,9 @@ class PetaniController extends Controller
             $resorce  = $request->file('Foto');
             
             
-         if(!empty($resorce))  { 
+         if(!empty($resorce))  {
             $name   = $resorce->getClientOriginalName();
-            $resorce->move(\base_path() ."/public/foto_petani", $name);
+            $resorce->move("foto_petani", $name);
          $maspet = array('Nama_Petani'=>$Nama_Petani, 'Email'=>$Email, 'Alamat_Petani'=>$Alamat_Petani,'Nomor_Telpon'=>$Nomor_Telpon, 'Tanggal_Lahir'=>$Tanggal_Lahir,'Pendidikan_Terakhir'=>$Pendidikan_Terakhir, 'Jumlah_Tanggungan'=>$Jumlah_Tanggungan, 'Agama'=>$Agama, 'Deskripsi_Keahlian'=>$Deskripsi_Keahlian, 'Status'=>$Status, 'nama_istri'=> $nama_istri, 'jml_tng_kerja_musiman'=>$jml_tng_kerja_musiman, 'jml_lahan'=>$jml_lahan, 'Foto'=>$name);
 
          $detail=array('nama'=>$Nama_Petani,
@@ -375,7 +375,7 @@ class PetaniController extends Controller
         $cetak = DB::table('master_petani')->where('ID_User',$id)->first();
         // $url = "www.google.com/$cetak->ID_User";
         $url = "http://okenih.rapidserver.my.id/petani/$cetak->ID_User";
-        $img = 'public/foto_petani/dutataniid-teks.png';
+        $img = 'foto_petani/dutataniid-teks.png';
         // var_dump($url);
         $for = 'png';
         $h = 'H';
@@ -392,8 +392,18 @@ class PetaniController extends Controller
 
     public function dashboard_petani()
     {
-        
-        return view('petani.dashboard_petani');
+        $materi = DB::table('master_upload_materi')
+        ->join('master_detail_user', function($join){
+            $join->on('master_detail_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->join('master_user', function($join){
+            $join->on('master_user.ID_User', '=', 'master_upload_materi.ID_User');
+            })
+        ->count();
+        $lahan = DB::table('master_peta_lahan')->count();
+        $petani = DB::table('master_petani')->count();
+        $berita = DB::table('master_berita_informasi')->count();
+        return view('petani.dashboard_petani', compact('materi','lahan','petani','berita'));
     }
 
     
