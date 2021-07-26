@@ -110,13 +110,16 @@ Route::get('/pengajar/indextopik/destroy/{id}', 'TopikController@destroy');
 //  Route::get('../materipengajar/{{$materi->dokumen}}');
 Route::get('materi_public/{ID}','DasboardController@MateriPublic');
 Route::get('pengajar/profile','ProfileController@Profile');
-Route::get('/pengajar/ubahprofil/{id}','ProfileController@editprofil');
+Route::get('/pengajar/ubahprofil/{id}','ProfileController@ubahprofil');
 Route::post('/pengajar/updateprofile/{id}','ProfileController@update_profile');
 
 // Route::get('/updateprofile/ambilProvinsi/{id}','ProfileController@ubahprofil');
-Route::post('/pengajar/ubahprofil/ambilKabupaten/','ProfileController@ambilKabupaten');
-Route::post('ambilKecamatan/','ProfileController@ambilKecamatan');
+// Route::post('/pengajar/ubahprofil/ambilKabupaten/','ProfileController@ambilKabupaten');
+// Route::post('ambilKecamatan/','ProfileController@ambilKecamatan');
 //Route::post('/pengajar/ubahprofil/ambilKelurahan/','ProfileController@ambilKelurahan');
+Route::post('kabupaten','ProfileController@getKabupaten');
+Route::post('kecamatan','ProfileController@getKecamatan');
+Route::post('kelurahan_desa','ProfileController@getDesa');
 // Route::get('pengajar/indexpertanyaan', function () {
 //     return view('pengajar/indexpertanyaan');
 //  });
@@ -160,11 +163,17 @@ Route::get('data/diri/{id}','PetaniProfileController@data_diri_petani');
 
 Route::get('ubah/profile/{id}','PetaniProfileController@ubah_profile');
 
+Route::post('petani_kabupaten','PetaniProfileController@getKabupaten');
+Route::post('petani_kecamatan','PetaniProfileController@getKecamatan');
+Route::post('petani_kelurahan_desa','PetaniProfileController@getDesa');
 Route::post('/update/profile/{id}','PetaniProfileController@update_profile');
 
 Route::get('lahan/petani/{id}','PetaniProfileController@lahan_petani');
 Route::get('detail/lahan/{id}','PetaniProfileController@detail_lahan_petani');
 Route::get('cetak/petani/{id}','PetaniProfileController@cetak_petani');
+
+Route::get('ganti/password/{id}','PetaniProfileController@ganti_password');
+Route::post('ganti/{id}','PetaniProfileController@ganti');
 
 //BERITA
 Route::get('admin/berita', 'BeritaController@index');

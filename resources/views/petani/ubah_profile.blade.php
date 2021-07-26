@@ -66,7 +66,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nama Lengkap</label>
-                              <input class="form-control" type="text" name="nama" placeholder="Nama Lengkap" value="{{$ambil->nama}}" onchange="return validasiNama()">
+                              <input class="form-control" type="text" id="nama" name="nama" placeholder="Nama Lengkap" value="{{$ambil->nama}}" onchange="return validasiNama()">
                             </div>
                           </div>
                           <div class="col">
@@ -80,9 +80,9 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Jenis Kelamin</label>
-                              <select class="form-control" aria-label="Default select example" name="jenis_kelamin">
-                                <option value="1">Laki - Laki</option>
-                                <option value="2">Perempuan</option>
+                              <select name="jenis_kelamin" class="form-control">
+                                <option value="1" @if($ambil->jenis_kelamin == '1') ? selected : null @endif>Laki - Laki</option>
+                                <option value="2" @if($ambil->jenis_kelamin == '2') ? selected : null @endif>Perempuan</option>
                               </select>
                             </div>
                             
@@ -108,8 +108,53 @@
                             </div>
                           </div>
                         </div>
-                        
+
                         <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="provinsi">Provinsi</label>
+                              <select name="provinsi" id="provinsi-dropdown" class="form-control" placeholder="provinsi-dropdown">
+                                <option value="">Pilih Provinsi</option>
+                               <!-- <option value="{{$ambil->provinsi}}">{{$ambil->provinsi}}</option> -->
+                                @foreach($provinsi as $p)
+                                <option value="{{$p->Nama_Provinsi}}">{{$p->Nama_Provinsi}}</option>
+                                @endforeach
+                                </select>  
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="kabupaten">Kabupaten</label>
+                              <select class="form-control" name="kabupaten" id="kabupaten-dropdown">
+                                <option value="">Pilih Kabupaten</option>
+                                <!-- <option value="{{$ambil->kabupaten}}">{{$ambil->kabupaten}}</option>   -->
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Kecamatan</label>
+                              <select class="form-control" name="kecamatan" id="kecamatan-dropdown">
+                                <option value="">Pilih Kecamatan</option>
+                                <!-- <option value="{{$ambil->kecamatan}}">{{$ambil->kecamatan}}</option>   -->
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Kelurahan / Desa</label>
+                              <select class="form-control" name="kelurahan_desa" id="kelurahan_desa-dropdown">
+                                <option value="">Pilih Kelurahan / Desa</option>
+                                <!-- <option value="{{$ambil->kelurahan_desa}}">{{$ambil->kelurahan_desa}}</option>   -->
+                               </select>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- <div class="row">
                           
                           <div class="col">
                             <div class="form-group">
@@ -171,7 +216,6 @@
                                  @endforeach
                                  
                               </select>
-                              <!-- <select class="livesearch form-control" name="livesearch"></select> -->
 
                             </div>
                           </div>
@@ -210,7 +254,7 @@
                                </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
@@ -240,25 +284,92 @@
                   
                   <script type="text/javascript">
                     function validasiEkstensi(){
-    var inputFile = document.getElementById('file');
-    var pathFile = inputFile.value;
-    var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
-    if(!ekstensiOk.exec(pathFile)){
-        alert('Silakan upload file yang memiliki ekstensi .jpg/.png');
-        inputFile.value = '';
-        return false;
-    }else{
-        // Preview gambar
-        if (inputFile.files && inputFile.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('preview').innerHTML = '<img src="'+e.target.result+'" style="height:200px"/>';
-            };
-            reader.readAsDataURL(inputFile.files[0]);
-        }
-    }
-}
+                        var inputFile = document.getElementById('file');
+                        var pathFile = inputFile.value;
+                        var ekstensiOk = /(\.jpg|\.png)$/i;
+                        if(!ekstensiOk.exec(pathFile)){
+                            alert('Silakan upload file yang memiliki ekstensi .jpg/.png');
+                            inputFile.value = '';
+                            return false;
+                        }else{
+                            // Preview gambar
+                            if (inputFile.files && inputFile.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    document.getElementById('preview').innerHTML = '<img src="'+e.target.result+'" style="height:200px"/>';
+                                };
+                                reader.readAsDataURL(inputFile.files[0]);
+                            }
+                        }
+                    }
                   </script>
+
+                  <script>
+                  $(document).ready(function() {
+                      $('#provinsi-dropdown').on('change', function() {
+                      var Nama_Provinsi = this.value;
+                      $("#kabupaten-dropdown").html('');
+                          $.ajax({
+                          url:"{{url('petani_kabupaten')}}",
+                          type: "POST",
+                          data: {
+                              Nama_Provinsi: Nama_Provinsi,
+                              _token: '{{csrf_token()}}' 
+                              },
+                              dataType : 'json',
+                              success: function(result){
+                                  $('#kabupaten-dropdown').html('<option value="">Pilih Kabupaten</option>'); 
+                                  $.each(result.kabupaten,function(key,value){
+                                  $("#kabupaten-dropdown").append('<option value="'+value.Nama_Kabupaten+'">'+value.Nama_Kabupaten+'</option>');
+                                  });
+                                  $('#kecamatan-dropdown').html('<option value="">Silakan Pilih Kabupaten Dahulu</option>');
+                                  $('#kelurahan_desa-dropdown').html('<option value="">Silakan Pilih Kabupaten Dahulu</option>'); 
+                              }
+                          });
+                      });    
+
+                      $('#kabupaten-dropdown').on('change', function() {
+                      var Nama_Kabupaten = this.value;
+                      $("#kecamatan-dropdown").html('');
+                          $.ajax({
+                          url:"{{url('petani_kecamatan')}}",
+                          type: "POST",
+                          data: {
+                              Nama_Kabupaten: Nama_Kabupaten,
+                              _token: '{{csrf_token()}}' 
+                              },
+                              dataType : 'json',
+                              success: function(result){
+                                  $('#kecamatan-dropdown').html('<option value="">Pilih Kecamatan</option>'); 
+                                  $.each(result.kecamatan,function(key,value){
+                                  $("#kecamatan-dropdown").append('<option value="'+value.Nama_Kecamatan+'">'+value.Nama_Kecamatan+'</option>');
+                                  });
+                                  $('#kelurahan_desa-dropdown').html('<option value="">Silakan Pilih Kecamatan Dahulu</option>'); 
+                              }
+                          });
+                      });
+
+                      $('#kecamatan-dropdown').on('change', function() {
+                      var Nama_Kecamatan = this.value;
+                      $("#kelurahan_desa-dropdown").html('');
+                          $.ajax({
+                          url:"{{url('petani_kelurahan_desa')}}",
+                          type: "POST",
+                          data: {
+                              Nama_Kecamatan: Nama_Kecamatan,
+                              _token: '{{csrf_token()}}' 
+                              },
+                              dataType : 'json',
+                              success: function(result){
+                                  $('#kelurahan_desa-dropdown').html('<option value="">Pilih Kelurahan / Desa</option>'); 
+                                  $.each(result.kelurahan_desa,function(key,value){
+                                  $("#kelurahan_desa-dropdown").append('<option value="'+value.Nama_Desa+'">'+value.Nama_Desa+'</option>');
+                                  });
+                              }
+                          });
+                      });
+                  });
+              </script>
 
                 
 
@@ -312,6 +423,18 @@
        
     });
 });
+</script>
+<script>
+      function validasiNama(){
+          var inputNama = document.getElementById('nama');
+          var pathNama = inputNama.value;
+
+          if (pathNama.length > 30) {
+            if(alert("Nama akan dipotong karena melebihi batas maksimal")){
+              return true;
+            }
+          }
+        }
 </script>
                  
 

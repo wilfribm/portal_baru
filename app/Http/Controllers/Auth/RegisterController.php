@@ -218,7 +218,7 @@ class RegisterController extends Controller
 
             $idk = 'ID_Kategori' => 'required|regex:/^[a-zA-Z]+$/u',
 
-            $nm = 'nama' => 'required|regex:/^[a-zA-Z ]*$/|max:30|min:3',
+            $nm = 'nama' => 'required|regex:/^[a-zA-Z ]*$/',
             
             
             $nt = 'nomor_telpon'=>'required|regex:/^[0-9]+$/|min:10|max:12',
@@ -248,8 +248,8 @@ class RegisterController extends Controller
 
             'nama.required' => 'Nama Harus diisi',
             'nama.regex' => 'Nama Harus Mengandung Huruf',
-            'nama.max' => 'Nama Tidak Valid',
-            'nama.min' => 'Nama Tidak Valid',
+            // 'nama.max' => 'Nama Tidak Valid',
+            // 'nama.min' => 'Nama Tidak Valid',
 
             'tanggal_lahir.before' => 'Tanggal lahir Tidak Valid, setidaknya anda lahir 13 tahun lalu',
 
@@ -325,7 +325,8 @@ class RegisterController extends Controller
         $jawaban = ' asal ';
         $Tingkat_Priv = '0';
 
-        $nama = $request->input($nm);
+        $nama = substr($request->input($nm),0,29);
+        // $nama = $request->input($nm);
         $jenis_kelamin = $request->input($jk);
         $tanggal_lahir = $request->input($tgl);
         

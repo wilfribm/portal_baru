@@ -166,9 +166,9 @@
                     
                     </div>
                     <div class="row">
-                      <div class="col d-flex justify-content-end">
-                        <a href="/ubah/profile/{{$detail->ID_User}}" class="btn btn-primary btn-lg" style="margin-left: 850px;" >Ubah Profile</a>
-                        
+                      <div class="col justify-content-end">
+                        <button class="btn btn-warning btn-sm"><a style="color:white; text-decoration:none;" href="/ganti/password/{{$detail->ID_User}}">Ganti Password</a></button>
+                        <button class="btn btn-primary btn-sm"><a style="color:white; text-decoration:none;" href="/ubah/profile/{{$detail->ID_User}}">Ubah Profile</a></button>
                       </div>
                     </div>
                   </form>
