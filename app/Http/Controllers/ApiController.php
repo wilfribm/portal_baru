@@ -95,38 +95,34 @@ class ApiController extends Controller
             ], 401);
     }
 }
-//     public function login(Request $request){
 
-//         $validasi = db::table('master_user')
-//                          ->where('ID_User',$username = $request->input('ID_User'))
-//                          ->get()->first;
-//         // $validasi = DB::table('master_user')
-//         //     ->where('ID_User', '=', $ID_USer)
-//         //     ->where('password', '=', $password)
-//         //     ->count();
-//         if($validasi){ //apakah ID_User tersebut ada atau tidak
-//             //if(Hash::check($pass=$request->input('Password'), $validasi->ID_User->Password)){
-//             if(sha1($request->input('password')) == $validasi->ID_User->password){
-//                 $ambildata= DB::table('master_detail_user')->where('ID_User',$username)->get();
-//                 // $unquoted = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $ambildata);
-                
-//                 return response()->json(["Result"=>
-//                 ["ResultCode"=> 1,
-//                 "ResultMessage"=>"Success Login" ],
-//                 "User"=>$ambildata
-//             ], 200);
-//             } else{
-//                 return response()->json(["Result"=>
-//                 ["ResultCode"=> 0,
-//                 "ResultMessage"=>"User atau password salah" ]], 401);
-//             }
-//         }else{
-//             return response()->json(["Result"=>
-//             ["ResultCode"=> 0,
-//             "ResultMessage"=>"User atau password salah" ]
-//             ], 401);
-//     }
-// }
+    public function loginmobiledutataniku(Request $request){
+
+        $validasi = db::table('master_user')
+                         ->where('ID_User',$username = $request->input('ID_User'))
+                         ->get()->first;
+        
+        if($validasi){ //apakah ID_User tersebut ada atau tidak
+            
+            if(sha1($request->input('password')) == $validasi->ID_User->Password){
+                $ambildata= DB::table('master_detail_user')->where('ID_User',$username)->get();
+                return response()->json(["Result"=>
+                ["ResultCode"=> 1,
+                "ResultMessage"=>"Success Login" ],
+                "User"=>$ambildata
+            ], 200);
+            } else{
+                return response()->json(["Result"=>
+                ["ResultCode"=> 0,
+                "ResultMessage"=>"User atau password salah" ]], 401);
+            }
+        }else{
+            return response()->json(["Result"=>
+            ["ResultCode"=> 0,
+            "ResultMessage"=>"User atau password salah" ]
+            ], 401);
+        }
+    }
     
    
     public function pesertapilihmateri(request $request){

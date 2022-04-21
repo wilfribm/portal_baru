@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/register','ApiController@register');
 Route::post('/login','ApiController@login');
+Route::post('/loginmobile','ApiController@loginmobiledutataniku');
 
 Route::post('/pilihmateri','ApiController@pesertapilihmateri');
 Route::get('/kategori','ApiController@kategori');
