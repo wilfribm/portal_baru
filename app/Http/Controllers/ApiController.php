@@ -105,7 +105,9 @@ class ApiController extends Controller
         if($validasi){ //apakah ID_User tersebut ada atau tidak
             
             if(sha1($request->input('password')) == $validasi->ID_User->Password){
-                $ambildata= DB::table('master_detail_user')->where('ID_User',$username)->get();
+                $ambildata= DB::table('master_detail_user')
+                    ->join('master_petani','master_detail_user.ID_User','=','master_petani.ID_User')
+                    ->where('master_petani.ID_User',$username)->get();
                 return response()->json(["Result"=>
                 ["ResultCode"=> 1,
                 "ResultMessage"=>"Success Login" ],
