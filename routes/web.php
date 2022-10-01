@@ -199,3 +199,6 @@ Route::get('/listMateri/detailMateri/{ID}','landingpageController@detailmateri')
 Route::get('/profil', function () {
     return view('landing_page/profil');
 });
+
+//PEMETAAN
+Route::get('admin/lihatpeta', 'MappingController@index');

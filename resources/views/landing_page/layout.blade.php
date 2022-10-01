@@ -69,7 +69,7 @@
                         <a class="nav-link" href="/listMateri">Materi</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="/login">LOGIN</a>
+                        <a class="nav-link" href="{{url('/login')}}">LOGIN</a>
                         </li>
                     </ul>
                 </div>

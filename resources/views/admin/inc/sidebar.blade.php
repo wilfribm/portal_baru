@@ -234,10 +234,25 @@
           </li>
             </ul>
           </li>
-         
-       
-  
-
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-align-justify"></i>
+              <p>
+                Pemetaan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{url('admin/lihatpeta/')}}" class="nav-link">
+              <i class="nav-icon far fa-newspaper"></i>
+              <p>
+                Lihat Peta
+              </p>
+            </a>
+          </li>
+            </ul>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
